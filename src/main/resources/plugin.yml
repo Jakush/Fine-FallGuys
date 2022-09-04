@@ -4,3 +4,4 @@ main: retamrovec.finesoftware.fallguys.FallGuys
 api-version: 1.16
 authors: [ RETAMROVEC, Yando0, BoogeyMan ]
 description: Fall guys in minecraft.
+softdepend: [PlaceholderAPI]

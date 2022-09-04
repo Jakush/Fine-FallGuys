@@ -28,8 +28,6 @@ public class FallGuysYando {
     public void init() {
         // Here import all classes
         new ConfigManager("config.yml", this.getDataFolder());
-        ConfigManager.newConfiguration();
-        ConfigManager.saveConfiguration();
         FallGuys.instance();
     }
 

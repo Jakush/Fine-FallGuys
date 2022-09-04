@@ -13,16 +13,7 @@ import java.io.File;
 public class FallGuysYando {
 
 
-    @EventHandler
-    public void onJoinEvent(PlayerJoinEvent e) {
-        e.getPlayer().sendMessage(ChatColor.BLUE.BOLD + e.getPlayer().getName() + ChatColor.LIGHT_PURPLE + "Has joined the game!");
 
-    }
-    @EventHandler
-    public void onquitevnet(PlayerQuitEvent e) {
-        e.getPlayer().sendMessage(ChatColor.BLUE.BOLD + e.getPlayer().getName() + ChatColor.LIGHT_PURPLE + "Has Left the game!");
-
-    }
 
 
     public void init() {

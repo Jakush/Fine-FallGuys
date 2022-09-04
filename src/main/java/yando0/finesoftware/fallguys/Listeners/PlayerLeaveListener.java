@@ -9,7 +9,7 @@ public class PlayerLeaveListener implements Listener {
 
     @EventHandler
     public void onLeaveEvent(PlayerQuitEvent e) {
-        e.getPlayer().sendMessage(ChatColor.BLUE.BOLD + e.getPlayer().getName() + ChatColor.LIGHT_PURPLE + "Has Left the game!");
+        e.getPlayer().sendMessage(ChatColor.BOLD.BLUE + e.getPlayer().getName() + ChatColor.LIGHT_PURPLE + "Has Left the game!");
 
     }
 

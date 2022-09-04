@@ -9,7 +9,7 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
-        e.getPlayer().sendMessage(ChatColor.BLUE.BOLD + e.getPlayer().getName() + ChatColor.LIGHT_PURPLE + "Has joined the game!");
+        e.getPlayer().sendMessage(ChatColor.BOLD.BLUE + e.getPlayer().getName() + ChatColor.LIGHT_PURPLE + "Has joined the game!");
 
     }
 

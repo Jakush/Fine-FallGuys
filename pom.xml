@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Fine-FallGuys</groupId>
-    <artifactId>retamrovec.finesoftware.fallguys</artifactId>
+    <groupId>retamrovec.finesoftware.fallguys</groupId>
+    <artifactId>Fine-FallGuys</artifactId>
     <version>1.19-V1</version>
     <packaging>jar</packaging>
 
-    <name>Retamrovec.finesoftware.fallguys</name>
+    <name>Fine-FallGuys</name>
 
     <description>Fall guys in minecraft.</description>
     <properties>
@@ -62,6 +62,10 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>placeholderapi</id>
+            <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -69,6 +73,12 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.16.5-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.11.2</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

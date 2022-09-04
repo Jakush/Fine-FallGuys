@@ -3,8 +3,8 @@ package retamrovec.finesoftware.fallguys.Managers;
 public class Messages {
 
     public static void newConfiguration() {
-        ConfigManager.getConfiguration().addDefault("&9&l%player_name% &5has joined the game!", 2);
-        ConfigManager.getConfiguration().addDefault("&9&l%player_name% &5has left the game!", 2);
+        ConfigManager.getConfiguration().addDefault("player.join", "&9&l%player_name% &5has joined the game!");
+        ConfigManager.getConfiguration().addDefault("player.leave", "&9&l%player_name% &5has left the game!");
         ConfigManager.getConfiguration().options().copyDefaults(true);
     }
 

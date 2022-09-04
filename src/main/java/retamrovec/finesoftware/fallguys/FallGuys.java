@@ -18,11 +18,13 @@ public class FallGuys extends JavaPlugin {
         mainInstance = this;
         fallGuysYando.init();
         fallGuysBoogey.init();
-        ConfigManager.newFolder();
-        new ConfigManager("config.yml", this.getDataFolder());
+        ConfigManager.createFolder();
+        new ConfigManager(getDataFolder(), "config.yml");
+        ConfigManager.createConfiguration();
         Config.newConfiguration();
         ConfigManager.saveConfiguration();
-        new ConfigManager("messages.yml", this.getDataFolder());
+        new ConfigManager(getDataFolder(), "messages.yml");
+        ConfigManager.createConfiguration();
         Messages.newConfiguration();
         ConfigManager.saveConfiguration();
     }

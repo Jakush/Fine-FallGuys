@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Fine-FallGuys</groupId>
-    <artifactId>retamrovec.finesoftware.fallguys</artifactId>
+    <groupId>retamrovec.finesoftware.fallguys</groupId>
+    <artifactId>Fine-FallGuys</artifactId>
     <version>1.19-V1</version>
     <packaging>jar</packaging>
 
-    <name>Retamrovec.finesoftware.fallguys</name>
+    <name>Fine-FallGuys</name>
 
     <description>Fall guys in minecraft.</description>
     <properties>

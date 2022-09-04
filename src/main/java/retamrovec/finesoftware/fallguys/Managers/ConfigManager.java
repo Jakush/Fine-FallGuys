@@ -9,14 +9,22 @@ import java.io.IOException;
 
 public class ConfigManager {
 
-    private static String file;
-    private static File folder;
-    public ConfigManager(String file, File folder) {
-        ConfigManager.file = file;
-        ConfigManager.folder = folder;
+    private static File configuration;
+    private static YamlConfiguration getConfig;
+    public ConfigManager(File folder, String file) {
+        ConfigManager.configuration = new File(folder, file);
+        ConfigManager.getConfig = YamlConfiguration.loadConfiguration(configuration);
     }
-    private static final File configuration = new File(folder, file);
-    private static final YamlConfiguration getConfig = YamlConfiguration.loadConfiguration(configuration);
+
+    public static void createConfiguration() {
+        if (!configuration.exists()) {
+            try {
+                configuration.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
     public static YamlConfiguration getConfiguration() {
         return getConfig;
@@ -38,7 +46,7 @@ public class ConfigManager {
         }
     }
 
-    public static void newFolder() {
+    public static void createFolder() {
         if (!FallGuys.instance().getDataFolder().exists()) {
             FallGuys.instance().getDataFolder().mkdirs();
         }

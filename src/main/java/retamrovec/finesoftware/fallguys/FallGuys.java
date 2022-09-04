@@ -9,7 +9,11 @@ public class FallGuys extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        yando0.finesoftware.fallguys.FallGuys yando0FallGuys = new yando0.finesoftware.fallguys.FallGuys();
+        boogeyman.finesoftware.fallguys.FallGuys boogeymanFallGuys = new boogeyman.finesoftware.fallguys.FallGuys();
         mainInstance = this;
+        yando0FallGuys.init();
+        boogeymanFallGuys.init();
         new ConfigManager("config.yml", this.getDataFolder());
         ConfigManager.newConfiguration();
         ConfigManager.saveConfiguration();

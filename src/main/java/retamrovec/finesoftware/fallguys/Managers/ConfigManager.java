@@ -1,9 +1,8 @@
 package retamrovec.finesoftware.fallguys.Managers;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
+import retamrovec.finesoftware.fallguys.FallGuys;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,34 +38,10 @@ public class ConfigManager {
         }
     }
 
-    public static void newConfiguration() {
-        getConfig.addDefault("start.required_players", 2);
-        getConfig.addDefault("start.countdown-seconds", 15);
-        getConfig.addDefault("spawn.world", "world");
-        getConfig.addDefault("spawn.x", "0");
-        getConfig.addDefault("spawn.y", "64");
-        getConfig.addDefault("spawn.z", "0");
-        getConfig.addDefault("spawn.yaw", "0");
-        getConfig.addDefault("spawn.pitch", "90");
-        getConfig.options().copyDefaults(true);
-    }
-
-    public static int getNeededPlayers() {
-        return ConfigManager.getConfiguration().getInt("start.required_players");
-    }
-
-    public static int getCountdown() {
-        return ConfigManager.getConfiguration().getInt("start.countdown-seconds");
-    }
-
-    public static Location getSpawn() {
-        return new Location(
-            Bukkit.getWorld(getConfig.getString("spawn.world")),
-            getConfig.getDouble("spawn.x"),
-            getConfig.getDouble("spawn.y"),
-            getConfig.getDouble("spawn.z"),
-            (float) getConfig.getDouble("spawn.yaw"),
-            (float) getConfig.getDouble("spawn.pitch"));
+    public static void newFolder() {
+        if (!FallGuys.instance().getDataFolder().exists()) {
+            FallGuys.instance().getDataFolder().mkdirs();
+        }
     }
 
 }

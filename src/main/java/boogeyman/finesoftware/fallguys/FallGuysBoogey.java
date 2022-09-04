@@ -1,6 +1,6 @@
 package boogeyman.finesoftware.fallguys;
 
-public class FallGuys {
+public class FallGuysBoogey {
 
     public void init() {
         // Here import all classes

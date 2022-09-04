@@ -1,7 +1,9 @@
 package retamrovec.finesoftware.fallguys;
 
+import boogeyman.finesoftware.fallguys.FallGuysBoogey;
 import org.bukkit.plugin.java.JavaPlugin;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
+import yando0.finesoftware.fallguys.FallGuysYando;
 
 public class FallGuys extends JavaPlugin {
 
@@ -9,11 +11,11 @@ public class FallGuys extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        yando0.finesoftware.fallguys.FallGuys yando0FallGuys = new yando0.finesoftware.fallguys.FallGuys();
-        boogeyman.finesoftware.fallguys.FallGuys boogeymanFallGuys = new boogeyman.finesoftware.fallguys.FallGuys();
+        FallGuysYando fallGuysYando = new FallGuysYando();
+        FallGuysBoogey fallGuysBoogey = new FallGuysBoogey();
         mainInstance = this;
-        yando0FallGuys.init();
-        boogeymanFallGuys.init();
+        fallGuysYando.init();
+        fallGuysBoogey.init();
         new ConfigManager("config.yml", this.getDataFolder());
         ConfigManager.newConfiguration();
         ConfigManager.saveConfiguration();

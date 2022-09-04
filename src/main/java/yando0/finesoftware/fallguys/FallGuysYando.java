@@ -1,6 +1,6 @@
 package yando0.finesoftware.fallguys;
 
-public class FallGuys {
+public class FallGuysYando {
 
     public void init() {
         // Here import all classes

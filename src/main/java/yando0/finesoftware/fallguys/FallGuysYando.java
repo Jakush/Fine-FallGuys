@@ -1,5 +1,6 @@
 package yando0.finesoftware.fallguys;
 
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import yando0.finesoftware.fallguys.Listeners.PlayerJoinListener;

@@ -1,7 +1,8 @@
-package retamrovec.finesoftware.fallguys.Managers;
+package retamrovec.finesoftware.fallguys.Configs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 
 public class Config {
 

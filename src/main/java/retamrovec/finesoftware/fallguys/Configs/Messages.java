@@ -1,4 +1,6 @@
-package retamrovec.finesoftware.fallguys.Managers;
+package retamrovec.finesoftware.fallguys.Configs;
+
+import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 
 public class Messages {
 

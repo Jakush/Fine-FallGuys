@@ -5,7 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
-import retamrovec.finesoftware.fallguys.Managers.Config;
+import retamrovec.finesoftware.fallguys.Configs.Config;
 
 import java.util.ArrayList;
 import java.util.List;

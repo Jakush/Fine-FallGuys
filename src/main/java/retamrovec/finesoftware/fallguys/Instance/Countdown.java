@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
-import retamrovec.finesoftware.fallguys.Managers.Config;
+import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 
 public class Countdown extends BukkitRunnable {

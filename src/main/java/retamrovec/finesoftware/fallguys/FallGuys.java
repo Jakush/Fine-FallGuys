@@ -4,9 +4,9 @@ import boogeyman.finesoftware.fallguys.FallGuysBoogey;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
-import retamrovec.finesoftware.fallguys.Managers.Config;
+import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
-import retamrovec.finesoftware.fallguys.Managers.Messages;
+import retamrovec.finesoftware.fallguys.Configs.Messages;
 import yando0.finesoftware.fallguys.FallGuysYando;
 import yando0.finesoftware.fallguys.PAPI;
 

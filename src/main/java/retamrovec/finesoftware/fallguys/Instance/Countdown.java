@@ -10,11 +10,11 @@ import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 public class Countdown extends BukkitRunnable {
 
     private Arena arena;
-    private int countDownSeconds;
+    public static int countDownSeconds;
 
     public Countdown(Arena arena) {
         this.arena = arena;
-        this.countDownSeconds = Config.getCountdownSeconds();
+        countDownSeconds = Config.getCountdownSeconds();
     }
 
     public void start() {

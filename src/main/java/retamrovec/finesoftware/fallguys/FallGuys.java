@@ -2,6 +2,7 @@ package retamrovec.finesoftware.fallguys;
 
 import boogeyman.finesoftware.fallguys.FallGuysBoogey;
 import org.bukkit.plugin.java.JavaPlugin;
+import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
 import retamrovec.finesoftware.fallguys.Managers.Config;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import retamrovec.finesoftware.fallguys.Managers.Messages;
@@ -10,7 +11,7 @@ import yando0.finesoftware.fallguys.FallGuysYando;
 public class FallGuys extends JavaPlugin {
 
     private static FallGuys mainInstance;
-
+    private ArenaManager arenaManager;
     @Override
     public void onEnable() {
         FallGuysYando fallGuysYando = new FallGuysYando();
@@ -27,6 +28,8 @@ public class FallGuys extends JavaPlugin {
         ConfigManager.createConfiguration();
         Messages.newConfiguration();
         ConfigManager.saveConfiguration();
+
+        new ArenaManager(this);
     }
 
     @Override
@@ -37,6 +40,8 @@ public class FallGuys extends JavaPlugin {
     public static FallGuys instance() {
         return mainInstance;
     }
+
+    public ArenaManager getArenaManager() {return arenaManager;}
 
 
 }

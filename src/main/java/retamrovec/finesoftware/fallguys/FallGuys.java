@@ -3,6 +3,7 @@ package retamrovec.finesoftware.fallguys;
 import boogeyman.finesoftware.fallguys.FallGuysBoogey;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import retamrovec.finesoftware.fallguys.Commands.ArenaCommand;
 import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
 import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
@@ -36,6 +37,7 @@ public class FallGuys extends JavaPlugin {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new PAPI(this, arenaManager).register();
         }
+        getCommand("fallguys").setExecutor(new ArenaCommand());
     }
 
     @Override

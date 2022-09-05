@@ -41,12 +41,12 @@ public class PAPI extends PlaceholderExpansion {
         return true;
     }
 
-    @Override
     public String onRequest(OfflinePlayer player, @NotNull String params) {
         for (Arena arena : arenaManager.getArenas()) {
             if (params.equalsIgnoreCase("countdown_" + arena.getId())) {
                 if (arena.getState() != GameState.RECRUITING || arena.getState() != GameState.LIVE) {
-                    return String.valueOf(Countdown.countDownSeconds);
+                    Countdown countdown = new Countdown(arena);
+                    return String.valueOf(countdown.countDownSeconds);
                 }
             }
         }

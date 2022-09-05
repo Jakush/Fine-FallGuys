@@ -11,6 +11,7 @@ public class PlayerLeaveListener implements Listener {
 
     @EventHandler
     public void onLeaveEvent(PlayerQuitEvent e) {
+
         new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
         ConfigManager.getConfiguration().getString("player.leave");
         e.setQuitMessage("");

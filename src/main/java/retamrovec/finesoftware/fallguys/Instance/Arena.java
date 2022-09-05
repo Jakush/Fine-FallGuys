@@ -1,12 +1,14 @@
 package retamrovec.finesoftware.fallguys.Instance;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
+import yando0.finesoftware.fallguys.PAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,7 @@ public class Arena {
             }
             players.clear();
         }
+        sendTitle("", "");
         state = GameState.RECRUITING;
         countdown.cancel();
         countdown = new Countdown(this);
@@ -96,6 +99,18 @@ public class Arena {
     public void removePlayer(@NotNull Player player) {
         players.add(player.getUniqueId());
         player.teleport(Config.getLobbySpawn());
+        player.sendTitle("", "");
+
+        if (state == GameState.COUNTDOWN && players.size() < Config.getNeededPlayers()) {
+            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.short_players"), null)));
+            reset(false);
+            return;
+        }
+
+        if (state == GameState.LIVE && players.size() < Config.getNeededPlayers()) {
+            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.end_short_players"), null)));
+            reset(false);
+        }
     }
 
     /*
@@ -107,6 +122,7 @@ public class Arena {
     public int getId() {return id;}
     public GameState getState() {return state;}
     public List<UUID> getPlayers() {return players;}
+    public Game getGame() {return game;}
     public void setState(GameState state) {this.state = state;}
 
 }

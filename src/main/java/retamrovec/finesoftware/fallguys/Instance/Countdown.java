@@ -6,11 +6,12 @@ import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
+import yando0.finesoftware.fallguys.PAPI;
 
 public class Countdown extends BukkitRunnable {
 
     private Arena arena;
-    public static int countDownSeconds;
+    public int countDownSeconds;
 
     public Countdown(Arena arena) {
         this.arena = arena;
@@ -34,6 +35,10 @@ public class Countdown extends BukkitRunnable {
         if (countDownSeconds <= 10 || countDownSeconds % 15 == 0) {
             arena.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfiguration().getString("game.countdown")));
         }
+
+        String title = PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.title"), null);
+        String subTitle = PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.subtitle"), null);
+        arena.sendTitle(title, subTitle);
 
         countDownSeconds--;
     }

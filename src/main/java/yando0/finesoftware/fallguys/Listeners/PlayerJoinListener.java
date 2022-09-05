@@ -14,7 +14,6 @@ public class PlayerJoinListener implements Listener {
 
 
         new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
-        ConfigManager.getConfiguration().getString("player.join");
         e.getPlayer().sendMessage(ConfigManager.getConfiguration().getString("player.join"));
         e.setJoinMessage("");
 

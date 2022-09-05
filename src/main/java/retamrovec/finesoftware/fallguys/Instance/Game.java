@@ -33,7 +33,7 @@ public class Game {
         int playerLevel = levels.get(player.getUniqueId()) + 1;
         if (playerLevel == 2) {
             arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.end"), player)));
-
+            arena.reset(true);
             return;
         }
 

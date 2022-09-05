@@ -8,6 +8,7 @@ import retamrovec.finesoftware.fallguys.Managers.Config;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import retamrovec.finesoftware.fallguys.Managers.Messages;
 import yando0.finesoftware.fallguys.FallGuysYando;
+import yando0.finesoftware.fallguys.PAPI;
 
 public class FallGuys extends JavaPlugin {
 

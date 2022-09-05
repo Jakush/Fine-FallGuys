@@ -1,9 +1,10 @@
-package retamrovec.finesoftware.fallguys;
+package yando0.finesoftware.fallguys;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
+import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Instance.Arena;
 import retamrovec.finesoftware.fallguys.Instance.Countdown;
 import retamrovec.finesoftware.fallguys.Managers.ArenaManager;

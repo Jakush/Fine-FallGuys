@@ -21,7 +21,7 @@ public class Config {
         return ConfigManager.getConfiguration().getInt("start.required_players");
     }
 
-    public static int getCountdown() {
+    public static int getCountdownSeconds() {
         return ConfigManager.getConfiguration().getInt("start.countdown-seconds");
     }
 

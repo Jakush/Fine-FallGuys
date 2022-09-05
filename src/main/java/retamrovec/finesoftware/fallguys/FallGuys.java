@@ -12,6 +12,7 @@ public class FallGuys extends JavaPlugin {
 
     private static FallGuys mainInstance;
     private ArenaManager arenaManager;
+
     @Override
     public void onEnable() {
         FallGuysYando fallGuysYando = new FallGuysYando();
@@ -29,7 +30,7 @@ public class FallGuys extends JavaPlugin {
         Messages.newConfiguration();
         ConfigManager.saveConfiguration();
 
-        new ArenaManager(this);
+        arenaManager = new ArenaManager(this);
     }
 
     @Override

@@ -4,12 +4,17 @@ import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+import retamrovec.finesoftware.fallguys.FallGuys;
+import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 
 public class PlayerLeaveListener implements Listener {
 
     @EventHandler
     public void onLeaveEvent(PlayerQuitEvent e) {
-        e.getPlayer().sendMessage(ChatColor.BOLD.BLUE + e.getPlayer().getName() + ChatColor.LIGHT_PURPLE + "Has Left the game!");
+        new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
+        ConfigManager.getConfiguration().getString("player.leave");
+        e.setQuitMessage("");
+
 
     }
 

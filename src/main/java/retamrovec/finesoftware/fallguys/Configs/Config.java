@@ -15,6 +15,12 @@ public class Config {
         ConfigManager.getConfiguration().addDefault("spawn.z", "0");
         ConfigManager.getConfiguration().addDefault("spawn.yaw", "0");
         ConfigManager.getConfiguration().addDefault("spawn.pitch", "90");
+        ConfigManager.getConfiguration().addDefault("arenas.1.world", "world");
+        ConfigManager.getConfiguration().addDefault("arenas.1.x", "16");
+        ConfigManager.getConfiguration().addDefault("arenas.1.y", "69");
+        ConfigManager.getConfiguration().addDefault("arenas.1.z", "32");
+        ConfigManager.getConfiguration().addDefault("arenas.1.yaw", "0");
+        ConfigManager.getConfiguration().addDefault("arenas.1.pitch", "90");
         ConfigManager.getConfiguration().options().copyDefaults(true);
     }
 

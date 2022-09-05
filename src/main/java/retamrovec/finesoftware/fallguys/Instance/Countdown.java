@@ -27,7 +27,7 @@ public class Countdown extends BukkitRunnable {
         new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
         if (countDownSeconds == 0) {
             cancel();
-            // arena start
+            arena.start();
             return;
         }
 

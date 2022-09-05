@@ -1,7 +1,9 @@
 package yando0.finesoftware.fallguys;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
@@ -40,7 +42,7 @@ public class PAPI extends PlaceholderExpansion {
     }
 
     @Override
-    public String onRequest(OfflinePlayer player, String params) {
+    public String onRequest(OfflinePlayer player, @NotNull String params) {
         for (Arena arena : arenaManager.getArenas()) {
             if (params.equalsIgnoreCase("countdown_" + arena.getId())) {
                 if (arena.getState() != GameState.RECRUITING || arena.getState() != GameState.LIVE) {
@@ -49,5 +51,15 @@ public class PAPI extends PlaceholderExpansion {
             }
         }
         return null;
+    }
+
+    public static @NotNull String use(String message, Player player) {
+        message = PlaceholderAPI.setPlaceholders(player, message);
+        return message;
+    }
+
+    public static @NotNull String use(String message, OfflinePlayer player) {
+        message = PlaceholderAPI.setPlaceholders(player, message);
+        return message;
     }
 }

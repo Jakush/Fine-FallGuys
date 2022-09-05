@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.Configs.Config;
+import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +25,40 @@ public class Arena {
 
     private GameState state;
     private List<UUID> players;
+    private Countdown countdown;
+    private Game game;
     public Arena(int id, Location spawn) {
         this.id = id;
         this.spawn = spawn;
 
         this.state = GameState.RECRUITING;
         this.players = new ArrayList<>();
+        this.countdown = new Countdown(this);
+        this.game = new Game(this);
+    }
+
+    /*
+
+    GAME
+
+     */
+
+    public void start() {
+        game.start();
+    }
+
+    public void reset(boolean kickPlayers) {
+        if (kickPlayers) {
+            for (UUID uuid : players) {
+                Location loc = Config.getLobbySpawn();
+                Bukkit.getPlayer(uuid).teleport(loc);
+            }
+            players.clear();
+        }
+        state = GameState.RECRUITING;
+        countdown.cancel();
+        countdown = new Countdown(this);
+        game = new Game(this);
     }
     /*
 
@@ -58,6 +87,10 @@ public class Arena {
     public void addPlayer(@NotNull Player player) {
         players.add(player.getUniqueId());
         player.teleport(spawn);
+
+        if (state.equals(GameState.RECRUITING) && players.size() >= Config.getNeededPlayers()) {
+            countdown.start();
+        }
     }
 
     public void removePlayer(@NotNull Player player) {

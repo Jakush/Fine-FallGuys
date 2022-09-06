@@ -50,15 +50,16 @@ public class PAPI extends PlaceholderExpansion {
                 }
             }
         }
+        if (params.equalsIgnoreCase("arena_" + player.getName()) && player.isOnline()) {
+            Arena arena = FallGuys.instance().getArenaManager().getArena(player, true);
+            if (arena != null) {
+                return String.valueOf(arena.getId());
+            }
+        }
         return null;
     }
 
     public static @NotNull String use(String message, Player player) {
-        message = PlaceholderAPI.setPlaceholders(player, message);
-        return message;
-    }
-
-    public static @NotNull String use(String message, OfflinePlayer player) {
         message = PlaceholderAPI.setPlaceholders(player, message);
         return message;
     }

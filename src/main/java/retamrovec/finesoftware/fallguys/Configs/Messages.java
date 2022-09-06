@@ -1,5 +1,6 @@
 package retamrovec.finesoftware.fallguys.Configs;
 
+import org.bukkit.ChatColor;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 
 public class Messages {
@@ -22,7 +23,7 @@ public class Messages {
         ConfigManager.getConfiguration().addDefault("error.player_is_not_in_arena", "&cYou are not in an arena.");
         ConfigManager.getConfiguration().addDefault("error.already_in_arena", "&cYou are already in an arena.");
         ConfigManager.getConfiguration().addDefault("error.invalid_arena", "&cYou specified an invalid arena ID.");
-        ConfigManager.getConfiguration().addDefault("error.game-started", "&cGame already started. You have to select another arena or wait until this arena will end.");
+        ConfigManager.getConfiguration().addDefault("error.game-started", "&cGame already started.");
         ConfigManager.getConfiguration().options().copyDefaults(true);
     }
 

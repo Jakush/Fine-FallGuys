@@ -6,17 +6,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
+import yando0.finesoftware.fallguys.PAPI;
 
 public class PlayerLeaveListener implements Listener {
 
     @EventHandler
     public void onLeaveEvent(PlayerQuitEvent e) {
-
         new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
-        ConfigManager.getConfiguration().getString("player.leave");
-        e.setQuitMessage("");
-
-
+        e.setQuitMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("player.leave"), e.getPlayer())));
     }
 
 }

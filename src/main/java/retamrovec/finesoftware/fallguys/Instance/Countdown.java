@@ -10,6 +10,12 @@ import yando0.finesoftware.fallguys.PAPI;
 
 public class Countdown extends BukkitRunnable {
 
+    /*
+
+    This class is developed by RETAMROVEC.
+
+    */
+
     private Arena arena;
     public int countDownSeconds;
 
@@ -33,11 +39,11 @@ public class Countdown extends BukkitRunnable {
         }
 
         if (countDownSeconds <= 10 || countDownSeconds % 15 == 0) {
-            arena.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfiguration().getString("game.countdown")));
+            arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.message"), true)));
         }
 
-        String title = PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.title"), null);
-        String subTitle = PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.subtitle"), null);
+        String title = ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.title"), true));
+        String subTitle = ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.subtitle"), true));
         arena.sendTitle(title, subTitle);
 
         countDownSeconds--;

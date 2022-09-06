@@ -24,14 +24,16 @@ public class Arena {
 
     private int id;
     private Location spawn;
+    private Config config;
 
     private GameState state;
     private List<UUID> players;
     private Countdown countdown;
     private Game game;
-    public Arena(int id, Location spawn) {
+    public Arena(int id, Location spawn, Config config) {
         this.id = id;
         this.spawn = spawn;
+        this.config = config;
 
         this.state = GameState.RECRUITING;
         this.players = new ArrayList<>();
@@ -52,7 +54,7 @@ public class Arena {
     public void reset(boolean kickPlayers) {
         if (kickPlayers) {
             for (UUID uuid : players) {
-                Location loc = Config.getLobbySpawn();
+                Location loc = config.getLobbySpawn();
                 Bukkit.getPlayer(uuid).teleport(loc);
             }
             players.clear();
@@ -91,8 +93,13 @@ public class Arena {
         players.add(player.getUniqueId());
         player.teleport(spawn);
 
-        if (state.equals(GameState.RECRUITING) && players.size() >= Config.getNeededPlayers()) {
-            countdown.start();
+        Bukkit.getLogger().info("" + players.size());
+        Bukkit.getLogger().info("" + config.getNeededPlayers());
+
+        if (state.equals(GameState.RECRUITING)) {
+            if (players.size() >= config.getNeededPlayers()) {
+                countdown.start();
+            }
         }
     }
 
@@ -101,13 +108,13 @@ public class Arena {
         player.teleport(Config.getLobbySpawn());
         player.sendTitle("", "");
 
-        if (state == GameState.COUNTDOWN && players.size() < Config.getNeededPlayers()) {
+        if (state == GameState.COUNTDOWN && players.size() < config.getNeededPlayers()) {
             sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.short_players"), null)));
             reset(false);
             return;
         }
 
-        if (state == GameState.LIVE && players.size() < Config.getNeededPlayers()) {
+        if (state == GameState.LIVE && players.size() < config.getNeededPlayers()) {
             sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.end_short_players"), null)));
             reset(false);
         }

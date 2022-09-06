@@ -13,6 +13,13 @@ import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import yando0.finesoftware.fallguys.PAPI;
 
 public class ArenaCommand implements CommandExecutor {
+
+    /*
+
+    This class is developed by RETAMROVEC.
+
+     */
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
@@ -52,7 +59,7 @@ public class ArenaCommand implements CommandExecutor {
             try {
                 id = Integer.parseInt(args[1]);
             } catch (NumberFormatException e) {
-                ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("error.invalid_arena"), null));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("error.invalid_arena"), null)));
                 return false;
             }
 

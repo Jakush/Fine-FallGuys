@@ -12,6 +12,12 @@ import java.util.UUID;
 
 public class Game {
 
+     /*
+
+    This class is developed by RETAMROVEC.
+
+     */
+
     private Arena arena;
     private HashMap<UUID, Integer> levels;
     public Game(Arena arena) {

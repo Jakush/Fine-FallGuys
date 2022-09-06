@@ -2,9 +2,10 @@ package yando0.finesoftware.fallguys;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Instance.Arena;
@@ -41,16 +42,20 @@ public class PAPI extends PlaceholderExpansion {
         return true;
     }
 
-    public String onRequest(OfflinePlayer player, @NotNull String params) {
+    @Override
+    public String onPlaceholderRequest(Player player, @NotNull String params) {
         for (Arena arena : arenaManager.getArenas()) {
             if (params.equalsIgnoreCase("countdown_" + arena.getId())) {
                 if (arena.getState() != GameState.RECRUITING || arena.getState() != GameState.LIVE) {
-                    Countdown countdown = new Countdown(arena);
-                    return String.valueOf(countdown.countDownSeconds);
+                    int countdownSeconds = Config.getCountdownSeconds() * 20;
+                    Bukkit.getScheduler().runTaskTimer(FallGuys.instance(), () -> {
+
+                    }, 0, countdownSeconds);
+                    return String.valueOf(countdownSeconds);
                 }
             }
         }
-        if (params.equalsIgnoreCase("arena_" + player.getName()) && player.isOnline()) {
+        if (params.equalsIgnoreCase("arena_" + player.getName())) {
             Arena arena = FallGuys.instance().getArenaManager().getArena(player, true);
             if (arena != null) {
                 return String.valueOf(arena.getId());
@@ -62,5 +67,15 @@ public class PAPI extends PlaceholderExpansion {
     public static @NotNull String use(String message, Player player) {
         message = PlaceholderAPI.setPlaceholders(player, message);
         return message;
+    }
+
+    public static @NotNull String use(String message, boolean useRandomPlayer) {
+        if (useRandomPlayer) {
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                message = PlaceholderAPI.setPlaceholders(p, message);
+                return message;
+            }
+        }
+        return null;
     }
 }

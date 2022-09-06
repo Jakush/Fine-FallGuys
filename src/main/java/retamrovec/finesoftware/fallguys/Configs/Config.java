@@ -2,6 +2,7 @@ package retamrovec.finesoftware.fallguys.Configs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 
 public class Config {
@@ -24,12 +25,14 @@ public class Config {
         ConfigManager.getConfiguration().options().copyDefaults(true);
     }
 
-    public static int getNeededPlayers() {
-        return ConfigManager.getConfiguration().getInt("start.required_players");
+    public int getNeededPlayers() {
+        new ConfigManager(FallGuys.instance().getDataFolder(), "config.yml");
+        return ConfigManager.getConfiguration().getInt("required_players");
     }
 
     public static int getCountdownSeconds() {
-        return ConfigManager.getConfiguration().getInt("start.countdown-seconds");
+        new ConfigManager(FallGuys.instance().getDataFolder(), "config.yml");
+        return ConfigManager.getConfiguration().getInt("countdown-seconds");
     }
 
     public static Location getLobbySpawn() {

@@ -55,15 +55,22 @@ public class ArenaCommand implements CommandExecutor {
 
         if (args.length == 2 && args[0].equalsIgnoreCase("join")) {
             new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
+            int id;
+
             if (FallGuys.instance().getArenaManager().getArena(player) != null) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfiguration().getString("error.already_in_arena")));
                 return false;
             }
-            int id;
+
             try {
                 id = Integer.parseInt(args[1]);
             } catch (NumberFormatException e) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("error.invalid_arena"), null)));
+                return false;
+            }
+
+            if (FallGuys.instance().getArenaManager().getArena(id) == null) {
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfiguration().getString("error.already_in_arena")));
                 return false;
             }
 

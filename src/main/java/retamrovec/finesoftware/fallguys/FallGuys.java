@@ -34,6 +34,7 @@ public class FallGuys extends JavaPlugin {
         ConfigManager.saveConfiguration();
 
         arenaManager = new ArenaManager(this, new Config());
+        Bukkit.getLogger().info("Loaded these arenas " + arenaManager.getArenas());
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new PAPI(this, arenaManager).register();
         }

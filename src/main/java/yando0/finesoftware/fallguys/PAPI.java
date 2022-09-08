@@ -5,8 +5,6 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import retamrovec.finesoftware.fallguys.Configs.Config;
-import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Instance.Arena;
 import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
@@ -57,7 +55,7 @@ public class PAPI extends PlaceholderExpansion {
         return message;
     }
 
-    public static @NotNull String use(String message, boolean useRandomPlayer) {
+    public static String use(String message, boolean useRandomPlayer) {
         if (useRandomPlayer) {
             for (Player p : Bukkit.getOnlinePlayers()) {
                 message = PlaceholderAPI.setPlaceholders(p, message);

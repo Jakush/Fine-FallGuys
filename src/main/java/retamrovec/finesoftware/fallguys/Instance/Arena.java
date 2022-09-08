@@ -100,9 +100,6 @@ public class Arena {
         players.add(player.getUniqueId());
         player.teleport(spawn);
 
-        Bukkit.getLogger().info("" + players.size());
-        Bukkit.getLogger().info("" + config.getNeededPlayers());
-
         if (state.equals(GameState.RECRUITING)) {
             if (players.size() >= config.getNeededPlayers()) {
                 countdown.start();

@@ -24,7 +24,7 @@ public class ArenaManager {
     public ArenaManager(FallGuys fallGuys, Config config) {
         new ConfigManager(fallGuys.getDataFolder(), "config.yml");
         for (String str : ConfigManager.getConfiguration().getConfigurationSection("arenas.").getKeys(false)) {
-            arenas.add(new Arena(Integer.parseInt(str) - 1, new Location(
+            arenas.add(new Arena(Integer.parseInt(str), new Location(
                     Bukkit.getWorld(ConfigManager.getConfiguration().getString("arenas." + str + ".world")),
                     ConfigManager.getConfiguration().getDouble("arenas." + str + ".x"),
                     ConfigManager.getConfiguration().getDouble("arenas." + str + ".y"),

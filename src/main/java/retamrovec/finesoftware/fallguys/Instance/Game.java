@@ -1,5 +1,6 @@
 package retamrovec.finesoftware.fallguys.Instance;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -31,8 +32,9 @@ public class Game {
         new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
         arena.setState(GameState.LIVE);
         arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.start"), true)));
-        new ConfigManager(FallGuys.instance().getDataFolder(), "config.yml");
         arena.teleport(Config.getArenaSpawn(arena.getId()));
+        Bukkit.getLogger().info("ID" + arena.getId());
+        Bukkit.getLogger().info("Location" + Config.getArenaSpawn(arena.getId()));
 
         for (UUID uuid : arena.getPlayers()) {
             levels.put(uuid, 0);

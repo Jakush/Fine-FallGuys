@@ -4,11 +4,10 @@ import boogeyman.finesoftware.fallguys.FallGuysBoogey;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import retamrovec.finesoftware.fallguys.Commands.ArenaCommand;
-import retamrovec.finesoftware.fallguys.Instance.Arena;
-import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
 import retamrovec.finesoftware.fallguys.Configs.Config;
-import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import retamrovec.finesoftware.fallguys.Configs.Messages;
+import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
+import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import yando0.finesoftware.fallguys.FallGuysYando;
 import yando0.finesoftware.fallguys.PAPI;
 
@@ -35,8 +34,6 @@ public class FallGuys extends JavaPlugin {
         ConfigManager.saveConfiguration();
 
         arenaManager = new ArenaManager(this, new Config());
-        Arena arena = getArenaManager().getArena(0);
-        Bukkit.getLogger().info("HMM" + arena.getId() + arena.getState());
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new PAPI(this, arenaManager).register();
         }

@@ -1,5 +1,6 @@
 package retamrovec.finesoftware.fallguys.Commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Instance.Arena;
+import retamrovec.finesoftware.fallguys.Instance.Game;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import yando0.finesoftware.fallguys.PAPI;
 
@@ -35,6 +37,7 @@ public class ArenaCommand implements CommandExecutor {
             for (Arena arena : FallGuys.instance().getArenaManager().getArenas()) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use("&7- " + arena.getId() + "&8(&6" + arena.getState() + "&8)", player)));
             }
+            return false;
         }
 
         if (args.length == 1 && args[0].equalsIgnoreCase("leave")) {
@@ -47,6 +50,7 @@ public class ArenaCommand implements CommandExecutor {
             else {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("error.player_is_not_in_arena"), player)));
             }
+            return false;
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("join")) {
@@ -76,6 +80,7 @@ public class ArenaCommand implements CommandExecutor {
             else {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("error.invalid_arena"), null)));
             }
+            return false;
         }
         else {
             new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");

@@ -2,7 +2,10 @@ package retamrovec.finesoftware.fallguys.Configs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.FallGuys;
+import retamrovec.finesoftware.fallguys.Instance.Arena;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 
 public class Config {
@@ -36,6 +39,7 @@ public class Config {
     }
 
     public static Location getLobbySpawn() {
+        new ConfigManager(FallGuys.instance().getDataFolder(), "config.yml");
         return new Location(
                 Bukkit.getWorld(ConfigManager.getConfiguration().getString("spawn.world")),
                 ConfigManager.getConfiguration().getDouble("spawn.x"),
@@ -43,6 +47,17 @@ public class Config {
                 ConfigManager.getConfiguration().getDouble("spawn.z"),
                 (float) ConfigManager.getConfiguration().getDouble("spawn.yaw"),
                 (float) ConfigManager.getConfiguration().getDouble("spawn.pitch"));
+    }
+
+    public static @NotNull Location getArenaSpawn(int id) {
+        new ConfigManager(FallGuys.instance().getDataFolder(), "config.yml");
+        return new Location(
+                Bukkit.getWorld(ConfigManager.getConfiguration().getString("arenas." + id + ".world")),
+                ConfigManager.getConfiguration().getDouble("arenas." + id + ".x"),
+                ConfigManager.getConfiguration().getDouble("arenas." + id + ".y"),
+                ConfigManager.getConfiguration().getDouble("arenas." + id + ".z"),
+                (float) ConfigManager.getConfiguration().getDouble("arenas." + id + ".yaw"),
+                (float) ConfigManager.getConfiguration().getDouble("arenas." + id + ".pitch"));
     }
 
 }

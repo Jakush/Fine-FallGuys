@@ -9,7 +9,6 @@ import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Instance.Arena;
-import retamrovec.finesoftware.fallguys.Instance.Countdown;
 import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
 
 public class PAPI extends PlaceholderExpansion {
@@ -44,17 +43,6 @@ public class PAPI extends PlaceholderExpansion {
 
     @Override
     public String onPlaceholderRequest(Player player, @NotNull String params) {
-        for (Arena arena : arenaManager.getArenas()) {
-            if (params.equalsIgnoreCase("countdown_" + arena.getId())) {
-                if (arena.getState() != GameState.RECRUITING || arena.getState() != GameState.LIVE) {
-                    int countdownSeconds = Config.getCountdownSeconds() * 20;
-                    Bukkit.getScheduler().runTaskTimer(FallGuys.instance(), () -> {
-
-                    }, 0, countdownSeconds);
-                    return String.valueOf(countdownSeconds);
-                }
-            }
-        }
         if (params.equalsIgnoreCase("arena_" + player.getName())) {
             Arena arena = FallGuys.instance().getArenaManager().getArena(player, true);
             if (arena != null) {

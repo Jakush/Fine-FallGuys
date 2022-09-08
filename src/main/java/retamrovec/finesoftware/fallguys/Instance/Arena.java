@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.Configs.Config;
+import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import yando0.finesoftware.fallguys.PAPI;
 
@@ -83,6 +84,12 @@ public class Arena {
         }
     }
 
+    public void teleport(Location location) {
+        for (UUID uuid : players) {
+            Bukkit.getPlayer(uuid).teleport(location);
+        }
+    }
+
     /*
 
     PLAYERS
@@ -104,18 +111,20 @@ public class Arena {
     }
 
     public void removePlayer(@NotNull Player player) {
-        players.add(player.getUniqueId());
+        players.remove(player.getUniqueId());
         player.teleport(Config.getLobbySpawn());
         player.sendTitle("", "");
 
         if (state == GameState.COUNTDOWN && players.size() < config.getNeededPlayers()) {
-            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.short_players"), null)));
+            new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
+            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.short_players"), true)));
             reset(false);
             return;
         }
 
         if (state == GameState.LIVE && players.size() < config.getNeededPlayers()) {
-            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.end_short_players"), null)));
+            new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
+            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.end_short_players"), true)));
             reset(false);
         }
     }

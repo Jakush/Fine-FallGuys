@@ -2,6 +2,8 @@ package retamrovec.finesoftware.fallguys.Instance;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
@@ -18,24 +20,27 @@ public class Game {
 
      */
 
-    private Arena arena;
-    private HashMap<UUID, Integer> levels;
+    private static Arena arena;
+    private static HashMap<UUID, Integer> levels;
     public Game(Arena arena) {
-        this.arena = arena;
+        Game.arena = arena;
         levels = new HashMap<>();
     }
 
     public void start() {
         new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
         arena.setState(GameState.LIVE);
-        arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.start"), null)));
+        arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.start"), true)));
+        new ConfigManager(FallGuys.instance().getDataFolder(), "config.yml");
+        arena.teleport(Config.getArenaSpawn(arena.getId()));
 
         for (UUID uuid : arena.getPlayers()) {
             levels.put(uuid, 0);
         }
     }
 
-    public void addLevel(Player player) {
+    public void qualify(@NotNull Player player) {
+        new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
         int playerLevel = levels.get(player.getUniqueId()) + 1;
         if (playerLevel == 2) {
             arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.end"), player)));

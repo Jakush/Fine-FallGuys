@@ -39,11 +39,23 @@ public class Countdown extends BukkitRunnable {
         }
 
         if (countDownSeconds <= 10 || countDownSeconds % 15 == 0) {
-            arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.message"), true)));
+            String message = PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.message"), true);
+            String format = message
+                    .replace("%fallguys_countdown%", String.valueOf(countDownSeconds));
+            arena.sendMessage(ChatColor.translateAlternateColorCodes('&', format));
         }
 
-        String title = ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.title"), true));
-        String subTitle = ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.subtitle"), true));
+        String message = PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.title"), true);
+        String format = message
+                .replace("%fallguys_countdown%", String.valueOf(countDownSeconds));
+
+        String title = ChatColor.translateAlternateColorCodes('&', format);
+
+        String message1 = PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.subtitle"), true);
+        String format1 = message1
+                .replace("%fallguys_countdown%", String.valueOf(countDownSeconds));
+
+        String subTitle = ChatColor.translateAlternateColorCodes('&', format1);
         arena.sendTitle(title, subTitle);
 
         countDownSeconds--;

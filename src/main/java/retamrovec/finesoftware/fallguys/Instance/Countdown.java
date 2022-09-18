@@ -2,13 +2,13 @@ package retamrovec.finesoftware.fallguys.Instance;
 
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
+import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Configs.Config;
-import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import yando0.finesoftware.fallguys.PAPI;
 
-public class Countdown extends BukkitRunnable {
+public class Countdown extends BukkitRunnable implements LanguageHandler {
 
     /*
 
@@ -21,7 +21,8 @@ public class Countdown extends BukkitRunnable {
 
     public Countdown(Arena arena) {
         this.arena = arena;
-        countDownSeconds = Config.getCountdownSeconds();
+        Config config = new Config();
+        countDownSeconds = config.getCountdownSeconds();
     }
 
     public void start() {
@@ -31,7 +32,6 @@ public class Countdown extends BukkitRunnable {
 
     @Override
     public void run() {
-        new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
         if (countDownSeconds == 0) {
             cancel();
             arena.start();
@@ -39,19 +39,19 @@ public class Countdown extends BukkitRunnable {
         }
 
         if (countDownSeconds <= 10 || countDownSeconds % 15 == 0) {
-            String message = PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.message"), true);
+            String message = PAPI.use(getLang().getString("game.countdown.message"), true);
             String format = message
                     .replace("%fallguys_countdown%", String.valueOf(countDownSeconds));
             arena.sendMessage(ChatColor.translateAlternateColorCodes('&', format));
         }
 
-        String message = PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.title"), true);
+        String message = PAPI.use(getLang().getString("game.countdown.title"), true);
         String format = message
                 .replace("%fallguys_countdown%", String.valueOf(countDownSeconds));
 
         String title = ChatColor.translateAlternateColorCodes('&', format);
 
-        String message1 = PAPI.use(ConfigManager.getConfiguration().getString("game.countdown.subtitle"), true);
+        String message1 = PAPI.use(getLang().getString("game.countdown.subtitle"), true);
         String format1 = message1
                 .replace("%fallguys_countdown%", String.valueOf(countDownSeconds));
 

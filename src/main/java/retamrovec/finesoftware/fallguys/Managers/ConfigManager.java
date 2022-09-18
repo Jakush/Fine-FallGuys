@@ -9,14 +9,20 @@ import java.io.IOException;
 
 public class ConfigManager {
 
-    private static File configuration;
-    private static YamlConfiguration getConfig;
+    /*
+
+    This class is developed by RETAMROVEC.
+
+     */
+
+    private File configuration;
+    private YamlConfiguration getConfig;
     public ConfigManager(File folder, String file) {
-        ConfigManager.configuration = new File(folder, file);
-        ConfigManager.getConfig = YamlConfiguration.loadConfiguration(configuration);
+        this.configuration = new File(folder, file);
+        this.getConfig = YamlConfiguration.loadConfiguration(configuration);
     }
 
-    public static void createConfiguration() {
+    public void createConfiguration() {
         if (!configuration.exists()) {
             try {
                 configuration.createNewFile();
@@ -26,11 +32,11 @@ public class ConfigManager {
         }
     }
 
-    public static YamlConfiguration getConfiguration() {
+    public YamlConfiguration getConfiguration() {
         return getConfig;
     }
 
-    public static void saveConfiguration() {
+    public void saveConfiguration() {
         try {
             getConfig.save(configuration);
         } catch (IOException e) {
@@ -38,7 +44,7 @@ public class ConfigManager {
         }
     }
 
-    public static void reloadConfiguration() {
+    public void reloadConfiguration() {
         try {
             getConfig.load(configuration);
         } catch (IOException | InvalidConfigurationException e) {

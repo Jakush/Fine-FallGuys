@@ -24,16 +24,11 @@ public class FallGuys extends JavaPlugin {
         fallGuysYando.init();
         fallGuysBoogey.init();
         ConfigManager.createFolder();
-        new ConfigManager(getDataFolder(), "config.yml");
-        ConfigManager.createConfiguration();
-        Config.newConfiguration();
-        ConfigManager.saveConfiguration();
-        new ConfigManager(getDataFolder(), "messages.yml");
-        ConfigManager.createConfiguration();
-        Messages.newConfiguration();
-        ConfigManager.saveConfiguration();
-
-        arenaManager = new ArenaManager(this, new Config());
+        Config config = new Config();
+        config.init();
+        Messages messages = new Messages();
+        messages.init();
+        arenaManager = new ArenaManager(new Config());
         Bukkit.getLogger().info("Loaded these arenas " + arenaManager.getArenas());
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new PAPI(this, arenaManager).register();

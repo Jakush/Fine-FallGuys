@@ -1,20 +1,20 @@
 package retamrovec.finesoftware.fallguys.Commands;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import retamrovec.finesoftware.fallguys.Handlers.ConfigHandler;
+import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Instance.Arena;
-import retamrovec.finesoftware.fallguys.Instance.Game;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import yando0.finesoftware.fallguys.PAPI;
 
-public class ArenaCommand implements CommandExecutor {
+public class ArenaCommand implements CommandExecutor, ConfigHandler, LanguageHandler {
 
     /*
 
@@ -32,8 +32,7 @@ public class ArenaCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length == 1 && args[0].equalsIgnoreCase("list")) {
-            new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.available_arenas"), null)));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.available_arenas"), null)));
             for (Arena arena : FallGuys.instance().getArenaManager().getArenas()) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use("&7- " + arena.getId() + "&8(&6" + arena.getState() + "&8)", player)));
             }
@@ -41,57 +40,55 @@ public class ArenaCommand implements CommandExecutor {
         }
 
         if (args.length == 1 && args[0].equalsIgnoreCase("leave")) {
-            new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
             Arena arena = FallGuys.instance().getArenaManager().getArena(player);
             if (arena != null) {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("player.left_arena"), player)));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("player.left_arena"), player)));
                 arena.removePlayer(player);
             }
             else {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("error.player_is_not_in_arena"), player)));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("error.player_is_not_in_arena"), player)));
             }
             return false;
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("join")) {
-            new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
             int id;
 
             if (FallGuys.instance().getArenaManager().getArena(player) != null) {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfiguration().getString("error.already_in_arena")));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', getLang().getString("error.already_in_arena")));
                 return false;
             }
 
             try {
                 id = Integer.parseInt(args[1]);
             } catch (NumberFormatException e) {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("error.invalid_arena"), null)));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("error.invalid_arena"), null)));
                 return false;
             }
 
             if (FallGuys.instance().getArenaManager().getArena(id) == null) {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfiguration().getString("error.already_in_arena")));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', getLang().getString("error.already_in_arena")));
                 return false;
             }
 
             if (id >= 0 && id < FallGuys.instance().getArenaManager().getArenas().size()) {
                 Arena arena = FallGuys.instance().getArenaManager().getArena(id);
-                if (arena.getState() == GameState.RECRUITING || arena.getState() == GameState.COUNTDOWN) {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("player.join_arena"), player)));
+                if (arena.getState() == (GameState.RECRUITING) || arena.getState() == GameState.COUNTDOWN) {
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("player.join_arena"), player)));
                     arena.addPlayer(player);
                 }
                 else {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("error.game-started"), null)));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("error.game-started"), null)));
                 }
             }
             else {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("error.invalid_arena"), null)));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("error.invalid_arena"), null)));
             }
             return false;
         }
         else {
             new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("error.invalid_use"), player)));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("error.invalid_use"), player)));
         }
 
 

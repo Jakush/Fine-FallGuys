@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import retamrovec.finesoftware.fallguys.Handlers.ConfigHandler;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.FallGuys;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Arena {
+public class Arena implements ConfigHandler {
 
     /*
 
@@ -108,20 +109,21 @@ public class Arena {
     }
 
     public void removePlayer(@NotNull Player player) {
+        Config config = new Config();
         players.remove(player.getUniqueId());
-        player.teleport(Config.getLobbySpawn());
+        player.teleport(config.getLobbySpawn());
         player.sendTitle("", "");
 
         if (state == GameState.COUNTDOWN && players.size() < config.getNeededPlayers()) {
             new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
-            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.short_players"), true)));
+            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getConfig().getString("game.short_players"), true)));
             reset(false);
             return;
         }
 
         if (state == GameState.LIVE && players.size() < config.getNeededPlayers()) {
             new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
-            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(ConfigManager.getConfiguration().getString("game.end_short_players"), true)));
+            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getConfig().getString("game.end_short_players"), true)));
             reset(false);
         }
     }

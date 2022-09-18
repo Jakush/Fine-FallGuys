@@ -1,0 +1,22 @@
+player:
+  join: "&9&l%player_name% &5has joined the game!"
+  leave: "&9&l%player_name% &5has left the game!"
+  qualified: "&aYou has been qualified in this round. &9Congratulations!"
+  left_arena: "&aYou left the arena."
+  join_arena: "&aYou joined the arena."
+game:
+  start: "&aGame has started. Get to the finish line first to get qualified. Good luck!"
+  end: "&9&l%player_name% &ahas won! Thanks for playing, hope you will come on this mini-game soon as possible!"
+  short_players: "&aThere is not enough players. Countdown stopped."
+  end_short_players: "&aThe game has ended as too many players have left."
+  available_arenas: "&aThese are the available arenas:"
+  countdown:
+    title: "&a%fallguys_countdown% seconds."
+    subtitle: "&auntil game starts."
+    message: "&aGame will start in %fallguys_countdown%&a seconds."
+error:
+  invalid_use: "&cInvalid use of command."
+  player_is_not_in_arena: "&cYou are not in an arena."
+  already_in_arena: "&cYou are already in an arena."
+  invalid_arena: "&cYou specified an invalid arena ID."
+  game-started: "&cGame already started."

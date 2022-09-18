@@ -1,0 +1,17 @@
+required_players: 2
+countdown-seconds: 15
+spawn:
+  world: "world"
+  x: 0
+  y: 64
+  z: 0
+  yaw: 0
+  pitch: 90
+arenas:
+  0:
+    world: "world"
+    x: 16
+    y: 69
+    z: 32
+    yaw: 0
+    pitch: 90

@@ -5,6 +5,8 @@ import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 
+import java.io.File;
+
 public interface ConfigHandler {
 
     /*
@@ -29,9 +31,9 @@ public interface ConfigHandler {
     }
 
     default void saveDefaultConfig() {
-        ConfigManager config = new ConfigManager(FallGuys.instance().getDataFolder(), "config.yml");
-        config.createConfiguration();
-        Config.newConfiguration();
-        config.saveConfiguration();
+        File file = new File(FallGuys.instance().getDataFolder(), "config.yml");
+        if (!file.exists()) {
+            Config.newConfiguration();
+        }
     }
 }

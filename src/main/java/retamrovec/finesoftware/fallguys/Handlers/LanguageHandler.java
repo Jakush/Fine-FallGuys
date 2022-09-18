@@ -1,9 +1,12 @@
 package retamrovec.finesoftware.fallguys.Handlers;
 
 import org.bukkit.configuration.file.YamlConfiguration;
+import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Configs.Messages;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
+
+import java.io.File;
 
 public interface LanguageHandler {
 
@@ -29,9 +32,9 @@ public interface LanguageHandler {
     }
 
     default void saveDefaultLang() {
-        ConfigManager config = new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
-        config.createConfiguration();
-        Messages.newConfiguration();
-        config.saveConfiguration();
+        File file = new File(FallGuys.instance().getDataFolder(), "messages.yml");
+        if (!file.exists()) {
+            Messages.newConfiguration();
+        }
     }
 }

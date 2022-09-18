@@ -29,7 +29,7 @@ public class Game implements LanguageHandler {
     }
 
     public void start() {
-        Config config = new Config();
+        Config config = new Config(FallGuys.instance());
         arena.setState(GameState.LIVE);
         arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.start"), true)));
         arena.teleport(config.getArenaSpawn(arena.getId()));

@@ -21,7 +21,7 @@ public class Countdown extends BukkitRunnable implements LanguageHandler {
 
     public Countdown(Arena arena) {
         this.arena = arena;
-        Config config = new Config();
+        Config config = new Config(FallGuys.instance());
         countDownSeconds = config.getCountdownSeconds();
     }
 

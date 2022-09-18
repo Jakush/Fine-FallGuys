@@ -109,7 +109,7 @@ public class Arena implements ConfigHandler {
     }
 
     public void removePlayer(@NotNull Player player) {
-        Config config = new Config();
+        Config config = new Config(FallGuys.instance());
         players.remove(player.getUniqueId());
         player.teleport(config.getLobbySpawn());
         player.sendTitle("", "");

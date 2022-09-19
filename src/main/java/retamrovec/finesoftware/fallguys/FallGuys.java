@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import retamrovec.finesoftware.fallguys.Commands.ArenaCommand;
 import retamrovec.finesoftware.fallguys.Configs.Config;
+import retamrovec.finesoftware.fallguys.Configs.Functions;
 import retamrovec.finesoftware.fallguys.Configs.Messages;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
@@ -24,12 +25,13 @@ public class FallGuys extends JavaPlugin implements LanguageHandler {
         mainInstance = this;
         fallGuysYando.init();
         fallGuysBoogey.init();
-        Bukkit.getLogger().info("Test:" + getLang().getString("game.start"));
         ConfigManager.createFolder();
-        Config config = new Config(FallGuys.instance());
+        Config config = new Config(this);
         config.init();
         Messages messages = new Messages(this);
         messages.init();
+        Functions functions = new Functions(this);
+        functions.init();
         arenaManager = new ArenaManager(new Config(FallGuys.instance()));
         Bukkit.getLogger().info("Loaded these arenas " + arenaManager.getArenas());
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {

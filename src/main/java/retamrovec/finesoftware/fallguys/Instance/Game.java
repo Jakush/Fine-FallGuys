@@ -7,7 +7,6 @@ import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
-import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import yando0.finesoftware.fallguys.PAPI;
 
 import java.util.HashMap;
@@ -40,7 +39,6 @@ public class Game implements LanguageHandler {
     }
 
     public void qualify(@NotNull Player player) {
-        new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
         int playerLevel = levels.get(player.getUniqueId()) + 1;
         if (playerLevel == 2) {
             arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.end"), player)));

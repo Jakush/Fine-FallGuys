@@ -1,0 +1,21 @@
+arenas:
+  0:
+    1:
+      from:
+        # World MUST be same as in "to". Other way, it will do bad things.
+        world: "world"
+        x: 10
+        y: 10
+        z: 10
+        # You don't have to change yaw & pitch, better leave this as default
+        yaw: 0
+        pitch: 0
+      to:
+        # World MUST be same as in "from". Other way, it will do bad things.
+        world: "world"
+        x: 20
+        y: 20
+        z: 20
+        # You don't have to change yaw & pitch, better leave this as default
+        yaw: 0
+        pitch: 0

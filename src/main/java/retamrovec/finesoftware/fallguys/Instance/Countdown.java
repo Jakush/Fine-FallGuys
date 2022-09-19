@@ -16,7 +16,7 @@ public class Countdown extends BukkitRunnable implements LanguageHandler {
 
     */
 
-    private Arena arena;
+    private final Arena arena;
     public int countDownSeconds;
 
     public Countdown(Arena arena) {

@@ -20,3 +20,7 @@ error:
   already_in_arena: "&cYou are already in an arena."
   invalid_arena: "&cYou specified an invalid arena ID."
   game-started: "&cGame already started."
+success:
+  reload:
+    config: "&aConfig file was reloaded successfully!"
+    lang: "&aLanguage file was reloaded successfully!"

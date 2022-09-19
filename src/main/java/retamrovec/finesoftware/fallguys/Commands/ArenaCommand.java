@@ -31,7 +31,7 @@ public class ArenaCommand implements CommandExecutor, ConfigHandler, LanguageHan
         }
         Player player = (Player) sender;
 
-        if (args.length == 1 && args[0].equalsIgnoreCase("list")) {
+        if (args[0].equalsIgnoreCase("list") && args.length == 1) {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.available_arenas"), null)));
             for (Arena arena : FallGuys.instance().getArenaManager().getArenas()) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use("&7- " + arena.getId() + "&8(&6" + arena.getState() + "&8)", player)));
@@ -39,7 +39,7 @@ public class ArenaCommand implements CommandExecutor, ConfigHandler, LanguageHan
             return false;
         }
 
-        if (args.length == 1 && args[0].equalsIgnoreCase("leave")) {
+        if (args[0].equalsIgnoreCase("leave") && args.length == 1) {
             Arena arena = FallGuys.instance().getArenaManager().getArena(player);
             if (arena != null) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("player.left_arena"), player)));
@@ -51,7 +51,7 @@ public class ArenaCommand implements CommandExecutor, ConfigHandler, LanguageHan
             return false;
         }
 
-        if (args.length == 2 && args[0].equalsIgnoreCase("join")) {
+        if (args[0].equalsIgnoreCase("join") && args.length == 2) {
             int id;
 
             if (FallGuys.instance().getArenaManager().getArena(player) != null) {
@@ -86,12 +86,23 @@ public class ArenaCommand implements CommandExecutor, ConfigHandler, LanguageHan
             }
             return false;
         }
-        else {
-            new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
+        if (args[0].equalsIgnoreCase("reload") && args.length == 2) {
+            if (args[1].equalsIgnoreCase("config")) {
+                saveConfig();
+                reloadConfig();
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("success.reload.config"), player)));
+                return true;
+            }
+            if (args[1].equalsIgnoreCase("lang") || args[1].equalsIgnoreCase("language")) {
+                saveLang();
+                reloadLang();
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("success.reload.lang"), player)));
+                return true;
+            }
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("error.invalid_use"), player)));
+            return false;
         }
-
-
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("error.invalid_use"), player)));
         return false;
     }
 }

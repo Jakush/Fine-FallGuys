@@ -11,6 +11,7 @@ import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Instance.Arena;
+import retamrovec.finesoftware.fallguys.Instance.Game;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import yando0.finesoftware.fallguys.PAPI;
 
@@ -76,6 +77,9 @@ public class ArenaCommand implements CommandExecutor, ConfigHandler, LanguageHan
                 if (arena.getState() == (GameState.RECRUITING) || arena.getState() == GameState.COUNTDOWN) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("player.join_arena"), player)));
                     arena.addPlayer(player);
+                    Game game = new Game(arena);
+                    game.levels.put(player.getUniqueId(), 0);
+                    return false;
                 }
                 else {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("error.game-started"), null)));

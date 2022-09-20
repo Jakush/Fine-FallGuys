@@ -1,15 +1,16 @@
 package retamrovec.finesoftware.fallguys.Instance;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
+import retamrovec.finesoftware.fallguys.Managers.LevelManager;
 import yando0.finesoftware.fallguys.PAPI;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 public class Game implements LanguageHandler {
@@ -20,11 +21,10 @@ public class Game implements LanguageHandler {
 
      */
 
-    private static Arena arena;
-    private static HashMap<UUID, Integer> levels;
+    private final Arena arena;
+
     public Game(Arena arena) {
-        Game.arena = arena;
-        levels = new HashMap<>();
+        this.arena = arena;
     }
 
     public void start() {
@@ -34,20 +34,23 @@ public class Game implements LanguageHandler {
         arena.teleport(config.getArenaSpawn(arena.getId()));
 
         for (UUID uuid : arena.getPlayers()) {
-            levels.put(uuid, 0);
+            new LevelManager(uuid);
         }
     }
 
-    public void qualify(@NotNull Player player) {
-        int playerLevel = levels.get(player.getUniqueId()) + 1;
+    public void qualify(@NotNull Player player, boolean spectator) {
+        LevelManager level = new LevelManager(player.getUniqueId());
+        int playerLevel = level.getLevel() + 1;
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("player.qualified"), player)));
+        level.setLevel(playerLevel);
         if (playerLevel == 2) {
             arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.end"), player)));
             arena.reset(true);
             return;
         }
-
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("player.qualified"), player)));
-        levels.replace(player.getUniqueId(), playerLevel);
+        if (spectator) {
+            player.setGameMode(GameMode.SPECTATOR);
+        }
     }
 
 }

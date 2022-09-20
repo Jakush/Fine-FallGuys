@@ -33,8 +33,8 @@ public class Countdown extends BukkitRunnable implements LanguageHandler {
     @Override
     public void run() {
         if (countDownSeconds == 0) {
-            cancel();
             arena.start();
+            cancel();
             return;
         }
 

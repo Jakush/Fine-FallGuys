@@ -1,8 +1,8 @@
 package retamrovec.finesoftware.fallguys.Listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -10,10 +10,8 @@ import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Handlers.ConfigHandler;
 import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Handlers.FunctionsHandler;
-import retamrovec.finesoftware.fallguys.Instance.Game;
+import retamrovec.finesoftware.fallguys.Instance.Arena;
 import retamrovec.finesoftware.fallguys.Managers.RegionManager;
-
-import java.util.UUID;
 
 public class PlayerMoveListener implements Listener, ConfigHandler, FunctionsHandler {
 
@@ -24,11 +22,9 @@ public class PlayerMoveListener implements Listener, ConfigHandler, FunctionsHan
 
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
-        Bukkit.getLogger().info("MoveEvent");
         if (FallGuys.instance().getArenaManager().getArena(e.getPlayer()) == null) return;
         if (FallGuys.instance().getArenaManager().getArena(e.getPlayer()).getPlayers() == null) return;
         if (FallGuys.instance().getArenaManager().getArena(e.getPlayer()).getPlayers().contains(e.getPlayer().getUniqueId())) {
-            Bukkit.getLogger().info("4");
             RegionManager regionManager = new RegionManager();
             Location location1 = new Location(
                     Bukkit.getWorld(getFunctions().getString("arenas.0.1.from.world")),
@@ -45,13 +41,11 @@ public class PlayerMoveListener implements Listener, ConfigHandler, FunctionsHan
                     getFunctions().getLong("arenas.0.1.to.yaw"),
                     getFunctions().getLong("arenas.0.1.to.pitch"));
             if (regionManager.isInRegion(location1, location2, e.getPlayer().getLocation())) {
-                Bukkit.getLogger().info("1");
-                Game game = new Game(FallGuys.instance().getArenaManager().getArena(e.getPlayer()));
-                game.qualify(e.getPlayer(), true);
-                return;
+                if (e.getPlayer().getGameMode() == GameMode.SPECTATOR) return;
+                Arena arena = FallGuys.instance().getArenaManager().getArena(e.getPlayer());
+                arena.getGame().qualify(e.getPlayer(), true);
             }
         }
-        Bukkit.getLogger().info("2");
     }
 
 }

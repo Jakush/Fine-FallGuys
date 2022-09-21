@@ -8,9 +8,9 @@ import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
-import retamrovec.finesoftware.fallguys.Managers.LevelManager;
 import yando0.finesoftware.fallguys.PAPI;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 public class Game implements LanguageHandler {
@@ -22,6 +22,7 @@ public class Game implements LanguageHandler {
      */
 
     private final Arena arena;
+    private final HashMap<UUID, Integer> levels = new HashMap<>();
 
     public Game(Arena arena) {
         this.arena = arena;
@@ -34,16 +35,15 @@ public class Game implements LanguageHandler {
         arena.teleport(config.getArenaSpawn(arena.getId()));
 
         for (UUID uuid : arena.getPlayers()) {
-            new LevelManager(uuid);
+            levels.put(uuid, 0);
         }
     }
 
     public void qualify(@NotNull Player player, boolean spectator) {
-        LevelManager level = new LevelManager(player.getUniqueId());
-        int playerLevel = level.getLevel() + 1;
+        int playerLevel = levels.get(player.getUniqueId()) + 1;
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("player.qualified"), player)));
-        level.setLevel(playerLevel);
-        if (playerLevel == 2) {
+        levels.replace(player.getUniqueId(), playerLevel);
+        if (levels.get(player.getUniqueId()) == 2) {
             arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.end"), player)));
             arena.reset(true);
             return;

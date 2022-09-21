@@ -77,8 +77,6 @@ public class ArenaCommand implements CommandExecutor, ConfigHandler, LanguageHan
                 if (arena.getState() == (GameState.RECRUITING) || arena.getState() == GameState.COUNTDOWN) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("player.join_arena"), player)));
                     arena.addPlayer(player);
-                    Game game = new Game(arena);
-                    game.levels.put(player.getUniqueId(), 0);
                     return false;
                 }
                 else {

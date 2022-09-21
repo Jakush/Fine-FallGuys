@@ -1,5 +1,6 @@
 package retamrovec.finesoftware.fallguys.Instance;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -10,7 +11,9 @@ import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import yando0.finesoftware.fallguys.PAPI;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class Game implements LanguageHandler {
@@ -52,5 +55,4 @@ public class Game implements LanguageHandler {
             player.setGameMode(GameMode.SPECTATOR);
         }
     }
-
 }

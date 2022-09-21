@@ -2,6 +2,7 @@ player:
   join: "&9&l%player_name% &5has joined the game!"
   leave: "&9&l%player_name% &5has left the game!"
   qualified: "&aYou has been qualified in this round. &9Congratulations!"
+  disqualified: "&aYou has been disqualified in this round. Hope you will be luckier next time!"
   left_arena: "&aYou left the arena."
   join_arena: "&aYou joined the arena."
 game:

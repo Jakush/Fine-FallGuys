@@ -9,6 +9,7 @@ import retamrovec.finesoftware.fallguys.Handlers.ConfigHandler;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.FallGuys;
+import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import yando0.finesoftware.fallguys.PAPI;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Arena implements ConfigHandler {
+public class Arena implements ConfigHandler, LanguageHandler {
 
     /*
 
@@ -128,6 +129,13 @@ public class Arena implements ConfigHandler {
         }
     }
 
+    public void kickPlayer(@NotNull Player player) {
+        Config config = new Config(FallGuys.instance());
+        players.remove(player.getUniqueId());
+        player.teleport(config.getLobbySpawn());
+        player.sendTitle("", "");
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getConfig().getString("player.disqualified"), player)));
+    }
     /*
 
     INFO

@@ -9,6 +9,7 @@ import retamrovec.finesoftware.fallguys.Configs.Functions;
 import retamrovec.finesoftware.fallguys.Configs.Messages;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Listeners.PlayerMoveListener;
+import retamrovec.finesoftware.fallguys.Listeners.PlayerMoveOnSlime;
 import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import yando0.finesoftware.fallguys.FallGuysYando;
@@ -38,6 +39,7 @@ public class FallGuys extends JavaPlugin implements LanguageHandler {
             new PAPI(this, arenaManager).register();
         }
         Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(config), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerMoveOnSlime(), this);
         getCommand("fallguys").setExecutor(new ArenaCommand());
     }
 

@@ -1,6 +1,5 @@
 package retamrovec.finesoftware.fallguys.Instance;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -11,9 +10,7 @@ import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import yando0.finesoftware.fallguys.PAPI;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 public class Game implements LanguageHandler {
@@ -25,14 +22,14 @@ public class Game implements LanguageHandler {
      */
 
     private final Arena arena;
-    private final HashMap<UUID, Integer> levels = new HashMap<>();
+    private final Config config = new Config(FallGuys.instance());
+    public final HashMap<UUID, Integer> levels = new HashMap<>();
 
     public Game(Arena arena) {
         this.arena = arena;
     }
 
     public void start() {
-        Config config = new Config(FallGuys.instance());
         arena.setState(GameState.LIVE);
         arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.start"), true)));
         arena.teleport(config.getArenaSpawn(arena.getId()));

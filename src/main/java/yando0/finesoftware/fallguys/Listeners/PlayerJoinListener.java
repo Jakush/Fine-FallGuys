@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import yando0.finesoftware.fallguys.PAPI;
 
-public class PlayerJoinListener implements Listener, LanguageHandler {
+public class  PlayerJoinListener implements Listener, LanguageHandler {
 
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {

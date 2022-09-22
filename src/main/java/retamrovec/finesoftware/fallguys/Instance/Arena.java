@@ -2,6 +2,7 @@ package retamrovec.finesoftware.fallguys.Instance;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -77,6 +78,12 @@ public class Arena implements ConfigHandler, LanguageHandler {
     public void sendMessage(String message) {
         for (UUID uuid : players) {
             Bukkit.getPlayer(uuid).sendMessage(message);
+        }
+    }
+
+    public void setGamemode(GameMode gamemode) {
+        for (UUID uuid : players) {
+            Bukkit.getPlayer(uuid).setGameMode(gamemode);
         }
     }
 

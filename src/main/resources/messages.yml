@@ -15,6 +15,9 @@ game:
     title: "&a%fallguys_countdown% seconds."
     subtitle: "&auntil game starts."
     message: "&aGame will start in %fallguys_countdown%&a seconds."
+  round_time:
+    message: "&cRound will end in %fallguys_countdown% seconds."
+    end: "&cRound ended. Players who don't completed this round were kicked."
 error:
   invalid_use: "&cInvalid use of command."
   player_is_not_in_arena: "&cYou are not in an arena."

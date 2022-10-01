@@ -12,7 +12,7 @@ import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
-import yando0.finesoftware.fallguys.PAPI;
+import retamrovec.finesoftware.fallguys.PAPI;
 
 import java.util.ArrayList;
 import java.util.List;

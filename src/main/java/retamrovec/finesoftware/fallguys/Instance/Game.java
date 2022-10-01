@@ -5,21 +5,23 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.Configs.Config;
-import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
-import yando0.finesoftware.fallguys.PAPI;
+import retamrovec.finesoftware.fallguys.Handlers.FunctionsHandler;
+import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
+import retamrovec.finesoftware.fallguys.Managers.FunctionManager;
+import retamrovec.finesoftware.fallguys.PAPI;
 
 import java.util.HashMap;
 import java.util.UUID;
 
-public class Game implements LanguageHandler {
-
-     /*
-
-    This class is developed by RETAMROVEC.
-
-     */
+/**
+ *
+ * You don't have permission to copy this class.
+ * @author RETAMROVEC
+ *
+ */
+public class Game implements LanguageHandler, FunctionsHandler {
 
     private final Arena arena;
     private final Config config = new Config(FallGuys.instance());
@@ -30,13 +32,31 @@ public class Game implements LanguageHandler {
     }
 
     public void start() {
+        FallGuys.instance().getLogger().info("LMAO2");
         arena.setState(GameState.LIVE);
         arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.start"), true)));
         arena.teleport(config.getArenaSpawn(arena.getId()));
 
+        /*
+
+        LEVELS
+
+         */
+
+
+        FallGuys.instance().getLogger().info("LMAO1");
         for (UUID uuid : arena.getPlayers()) {
             levels.put(uuid, 0);
         }
+
+        /*
+
+        FUNCTIONS IN-GAME
+
+         */
+
+        FallGuys.instance().getLogger().info("LMAO");
+        new FunctionManager(arena.getId());
     }
 
     public void qualify(@NotNull Player player, boolean spectator) {

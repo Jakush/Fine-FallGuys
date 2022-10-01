@@ -1,4 +1,4 @@
-package yando0.finesoftware.fallguys;
+package retamrovec.finesoftware.fallguys;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;

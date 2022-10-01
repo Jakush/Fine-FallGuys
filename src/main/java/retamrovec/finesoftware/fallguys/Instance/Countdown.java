@@ -6,7 +6,7 @@ import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Configs.Config;
-import yando0.finesoftware.fallguys.PAPI;
+import retamrovec.finesoftware.fallguys.PAPI;
 
 public class Countdown extends BukkitRunnable implements LanguageHandler {
 

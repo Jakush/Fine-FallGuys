@@ -11,13 +11,10 @@ import retamrovec.finesoftware.fallguys.Instance.Arena;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author RETAMROVEC
+ */
 public class ArenaManager implements ConfigHandler {
-
-    /*
-
-    This class is developed by RETAMROVEC.
-
-     */
 
     private List<Arena> arenas = new ArrayList<>();
 

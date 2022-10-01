@@ -1,11 +1,11 @@
-package yando0.finesoftware.fallguys.Listeners;
+package retamrovec.finesoftware.fallguys.Listeners;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
-import yando0.finesoftware.fallguys.PAPI;
+import retamrovec.finesoftware.fallguys.PAPI;
 
 public class  PlayerJoinListener implements Listener, LanguageHandler {
 

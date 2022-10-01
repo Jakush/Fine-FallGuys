@@ -2,7 +2,7 @@ name: FallGuys
 version: '${project.version}'
 main: retamrovec.finesoftware.fallguys.FallGuys
 api-version: 1.16
-authors: [ RETAMROVEC, Yando0, BoogeyMan ]
+authors: [ RETAMROVEC ]
 description: Fall guys in minecraft.
 softdepend: [PlaceholderAPI]
 commands:

@@ -24,15 +24,16 @@ import java.util.UUID;
 public class Game implements LanguageHandler, FunctionsHandler {
 
     private final Arena arena;
+    private final FunctionManager functionManager;
     private final Config config = new Config(FallGuys.instance());
     public final HashMap<UUID, Integer> levels = new HashMap<>();
 
     public Game(Arena arena) {
         this.arena = arena;
+        this.functionManager = new FunctionManager(arena.getId());
     }
 
     public void start() {
-        FallGuys.instance().getLogger().info("LMAO2");
         arena.setState(GameState.LIVE);
         arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.start"), true)));
         arena.teleport(config.getArenaSpawn(arena.getId()));
@@ -44,7 +45,6 @@ public class Game implements LanguageHandler, FunctionsHandler {
          */
 
 
-        FallGuys.instance().getLogger().info("LMAO1");
         for (UUID uuid : arena.getPlayers()) {
             levels.put(uuid, 0);
         }
@@ -55,8 +55,7 @@ public class Game implements LanguageHandler, FunctionsHandler {
 
          */
 
-        FallGuys.instance().getLogger().info("LMAO");
-        new FunctionManager(arena.getId());
+        functionManager.startAll();
     }
 
     public void qualify(@NotNull Player player, boolean spectator) {
@@ -65,6 +64,7 @@ public class Game implements LanguageHandler, FunctionsHandler {
         levels.replace(player.getUniqueId(), playerLevel);
         if (levels.get(player.getUniqueId()) == 2) {
             arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.end"), player)));
+            functionManager.startAll();
             arena.reset(true);
             return;
         }

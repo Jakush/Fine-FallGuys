@@ -10,18 +10,12 @@ arenas:
         x: 10
         y: 10
         z: 10
-        # You don't have to change yaw & pitch, better leave this as default
-        yaw: 0
-        pitch: 0
       to:
         # World MUST be same as in "from". Other way, it will do bad things.
         world: "world"
         x: 20
         y: 20
         z: 20
-        # You don't have to change yaw & pitch, better leave this as default
-        yaw: 0
-        pitch: 0
     2:
       # CUBOID BLOCK SPAWNER ON SLIMES
       # WHERE WILL BE BLOCKS PLACED YOU CAN CHOOSE, IT IS UNLIMITED!
@@ -32,18 +26,16 @@ arenas:
           x: 10
           y: 10
           z: 10
-           # You don't have to change yaw & pitch, better leave this as default
-          yaw: 0
-          pitch: 0
         to:
           # World MUST be same as in "from". Other way, it will do bad things.
           world: "world"
           x: 20
           y: 20
           z: 20
-          # You don't have to change yaw & pitch, better leave this as default
-          yaw: 0
-          pitch: 0
         # Type here material DATA. Search more at
         # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
         type: 'DIAMOND_BLOCK'
+        # If you want, you can override speed of generating blocks
+        # Default value = 20 (ticks)
+        # Leave value in ticks, 20 ticks = 1 second
+        speed: 20

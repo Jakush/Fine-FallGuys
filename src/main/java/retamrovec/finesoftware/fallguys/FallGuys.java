@@ -1,6 +1,5 @@
 package retamrovec.finesoftware.fallguys;
 
-import me.neznamy.tab.api.TabAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,21 +11,18 @@ import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Listeners.*;
 import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
-import retamrovec.finesoftware.fallguys.Managers.LoggerManager;
 
 public class FallGuys extends JavaPlugin implements LanguageHandler {
 
     // Managers (instances)
     private static FallGuys mainInstance;
     private ArenaManager arenaManager;
-    private LoggerManager loggerManager;
     // Values
     private boolean ownTAB = true;
 
     @Override
     public void onEnable() {
         mainInstance = this;
-        loggerManager = new LoggerManager(getLogger());
         ConfigManager.createFolder();
         Config config = new Config(this);
         config.init();
@@ -44,9 +40,9 @@ public class FallGuys extends JavaPlugin implements LanguageHandler {
                 setOwnTAB(false);
             }
         }
-        Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(config), this);
         Bukkit.getPluginManager().registerEvents(new PlayerMoveOnSlime(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerMoveOnIce(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(config), this);
         Bukkit.getPluginManager().registerEvents(new PlayerBlockBreak(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerBlockPlace(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
@@ -73,7 +69,4 @@ public class FallGuys extends JavaPlugin implements LanguageHandler {
         this.ownTAB = ownTAB;
     }
 
-    public LoggerManager getLoggerManager() {
-        return loggerManager;
-    }
 }

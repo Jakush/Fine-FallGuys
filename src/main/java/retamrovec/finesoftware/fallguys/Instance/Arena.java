@@ -8,11 +8,11 @@ import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
-import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 import retamrovec.finesoftware.fallguys.Maps.Map1.SlimeJump;
 import retamrovec.finesoftware.fallguys.PAPI;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +27,8 @@ public class Arena implements ConfigHandler, LanguageHandler {
 
     private GameState state;
     private List<UUID> players;
+    private HashMap<UUID, Scoreboard> scoreboard;
+    private HashMap<UUID, Tablist> tablist;
     private Countdown countdown;
     private Game game;
     public Arena(int id, Location spawn, Config config) {
@@ -38,6 +40,8 @@ public class Arena implements ConfigHandler, LanguageHandler {
         this.players = new ArrayList<>();
         this.countdown = new Countdown(this);
         this.game = new Game(this);
+        this.scoreboard = new HashMap<>();
+        this.tablist = new HashMap<>();
     }
 
     /*
@@ -47,7 +51,6 @@ public class Arena implements ConfigHandler, LanguageHandler {
      */
 
     public void start() {
-        Bukkit.getLogger().info("222");
         game.start();
     }
 
@@ -87,6 +90,7 @@ public class Arena implements ConfigHandler, LanguageHandler {
         for (UUID uuid : players) {
             Scoreboard scoreboard = new Scoreboard(uuid);
             scoreboard.start();
+            this.scoreboard.put(uuid, scoreboard);
         }
     }
 
@@ -94,6 +98,7 @@ public class Arena implements ConfigHandler, LanguageHandler {
         for (UUID uuid : players) {
             Tablist tablist = new Tablist(uuid);
             tablist.start();
+            this.tablist.put(uuid, tablist);
         }
     }
 
@@ -133,15 +138,13 @@ public class Arena implements ConfigHandler, LanguageHandler {
         player.sendTitle("", "");
 
         if (state == GameState.COUNTDOWN && players.size() < config.getNeededPlayers()) {
-            new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
-            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getConfig().getString("game.short_players"), true)));
+            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.short_players"), true)));
             reset(false);
             return;
         }
 
         if (state == GameState.LIVE && players.size() < config.getNeededPlayers()) {
-            new ConfigManager(FallGuys.instance().getDataFolder(), "messages.yml");
-            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getConfig().getString("game.end_short_players"), true)));
+            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.end_short_players"), true)));
             reset(false);
         }
     }
@@ -151,7 +154,14 @@ public class Arena implements ConfigHandler, LanguageHandler {
         players.remove(player.getUniqueId());
         player.teleport(config.getLobbySpawn());
         player.sendTitle("", "");
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getConfig().getString("player.disqualified"), player)));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("player.disqualified"), player)));
+        scoreboard.get(player.getUniqueId()).stop();
+        tablist.get(player.getUniqueId()).stop();
+
+        if (state == GameState.LIVE && players.size() < config.getNeededPlayers()) {
+            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.end_short_players"), true)));
+            reset(false);
+        }
     }
     /*
 

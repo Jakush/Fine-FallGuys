@@ -21,6 +21,9 @@ public class Tablist extends BukkitRunnable implements ConfigHandler {
     public void start() {
         runTaskTimer(FallGuys.instance(), 0, 20);
     }
+    public void stop() {
+        cancel();
+    }
 
     @Override
     public void run() {
@@ -29,6 +32,7 @@ public class Tablist extends BukkitRunnable implements ConfigHandler {
             return;
         }
         if (player == null) {
+            FallGuys.instance().removeTablist();
             cancel();
             return;
         }

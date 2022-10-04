@@ -26,12 +26,10 @@ public class Countdown extends BukkitRunnable implements LanguageHandler {
     public void start() {
         arena.setState(GameState.COUNTDOWN);
         runTaskTimer(FallGuys.instance(), 0, 20);
-        Bukkit.getLogger().info("333");
     }
 
     @Override
     public void run() {
-        Bukkit.getLogger().info("4444");
         if (countDownSeconds == 0) {
             arena.start();
             cancel();

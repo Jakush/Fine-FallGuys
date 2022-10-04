@@ -40,7 +40,6 @@ public class Game implements LanguageHandler, FunctionsHandler, ConfigHandler {
     }
 
     public void start() {
-        Bukkit.getLogger().info("111");
         arena.setGamemode(GameMode.SURVIVAL);
         arena.setState(GameState.LIVE);
         arena.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.start"), true)));

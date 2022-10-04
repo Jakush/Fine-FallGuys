@@ -14,9 +14,12 @@ import java.util.UUID;
 public class GameTime extends BukkitRunnable {
 
     private final Arena arena;
+    private final Config config;
     public int i;
     public GameTime(Arena arena) {
         this.arena = arena;
+        config = new Config(FallGuys.instance());
+        this.i = config.getGameTime();
     }
     private final List<Integer> level = new ArrayList<>();
 
@@ -26,8 +29,7 @@ public class GameTime extends BukkitRunnable {
 
     @Override
     public void run() {
-        Config config = new Config(FallGuys.instance());
-        if (i == config.getGameTime()) {
+        if (i == 0) {
             level.add(level.size() + 1);
             for (UUID uuid : arena.getPlayers()) {
                 Player p = Bukkit.getPlayer(uuid);
@@ -36,15 +38,18 @@ public class GameTime extends BukkitRunnable {
                     return;
                 }
                 int i2 = arena.getGame().levels.get(uuid);
-                if (i2 == level.size()) {
+                if (i2 < level.size()) {
+                    FallGuys.instance().removeScoreboard();
+                    FallGuys.instance().removeTablist();
                     arena.kickPlayer(p);
+                    return;
                 }
                 p.setGameMode(GameMode.SURVIVAL);
                 p.teleport(config.getArenaSpawn(arena.getId()));
             }
-            i = 0;
+            i = config.getGameTime();
             return;
         }
-        i++;
+        i--;
     }
 }

@@ -4,7 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,25 +32,36 @@ public class FallGuys extends JavaPlugin implements LanguageHandler {
     private ArenaManager arenaManager;
     // Values
     private boolean ownTAB = true;
+    private int dependTotal;
+    private int commandsTotal;
+    private int listenersTotal;
     private String ver = getDescription().getVersion();
 
     @Override
     public void onLoad() {
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&9|----------|"));
-        Bukkit.getConsoleSender().sendMessage("    ");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&9| FallGuys "));
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&9| Plugin   "));
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&9| was      "));
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&9| proccesed"));
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&9| to load!"));
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&9| " + ver));
-        Bukkit.getConsoleSender().sendMessage("    ");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&9|----------|"));
+        logConsole("&9|----------|");
+        logConsole("&9|");
+        logConsole("&9| &cFALL GUYS");
+        logConsole("&9| &7Loading plugin version");
+        logConsole("&9| &a" + ver);
+        logConsole("&9|");
+        logConsole("&9| &7Loading server version");
+        logConsole("&9| &a" + Bukkit.getServer().getBukkitVersion());
+        logConsole("&9| &a" + Bukkit.getServer().getVersion());
+        logConsole("&9|");
+        logConsole("&9|----------|");
     }
 
     @Override
     public void onEnable() {
+        logConsole("&9|----------|");
+        logConsole("&9|");
+        logConsole("&9| &cFALL GUYS");
         mainInstance = this;
+        logConsole("&9| &7Enabling plugin version");
+        logConsole("&9| &a" + ver);
+        logConsole("&9|");
+        logConsole("&9| &7Loading configs...");
         ConfigManager.createFolder();
         Config config = new Config(this);
         config.init();
@@ -56,33 +69,65 @@ public class FallGuys extends JavaPlugin implements LanguageHandler {
         messages.init();
         Functions functions = new Functions(this);
         functions.init();
+        logConsole("&9| &7Loading arenas...");
         arenaManager = new ArenaManager(new Config(FallGuys.instance()));
+        logConsole("&9| &7Checking for dependencies...");
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            logConsole("&9| &7PlaceholderAPI was found!");
+            logConsole("&9| &7Hooking into PlaceholderAPI.");
             papi = new PAPI();
             papi.register();
+            dependTotal++;
         }
         if (Bukkit.getPluginManager().getPlugin("TAB") != null) {
+            logConsole("&9| &7TAB plugin was found!");
+            logConsole("&9| &7Loading TAB (unknown author)...");
             Plugin tab = Bukkit.getPluginManager().getPlugin("TAB");
             if (tab.getDescription().getAuthors().contains("NEZNAMY")) {
+                logConsole("&9| &7Hooking into TAB (NEZNAMY).");
                 setOwnTAB(false);
+                dependTotal++;
+            }
+            else {
+                logConsole("&9| &7TAB plugin author is unknown.");
+                logConsole("&9| &7TAB plugin hook was cancelled.");
+                logConsole("&9| &7Using FallGuys tablist.");
             }
         }
-        Bukkit.getLogger().info(String.valueOf(getOwnTAB()));
-        Bukkit.getPluginManager().registerEvents(new PlayerMoveOnSlime(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerMoveOnIce(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(config), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerBlockBreak(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerBlockPlace(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerLeaveListener(), this);
-        Bukkit.getPluginManager().registerEvents(new GameEnd(), this);
-        getCommand("fallguys").setExecutor(new ArenaCommand());
+        logConsole("&9| &7Total of &a" + dependTotal + " &7dependencies were found and loaded!");
+        logConsole("&9| &7Loading commands...");
+        loadCommand("fallguys", new ArenaCommand());
+        logConsole("&9| &7Loaded &a" + commandsTotal + " &7command(s)!");
+        logConsole("&9| &7Loading listeners...");
+        logConsole("&9| &7Loading PlayerMovement listeners...");
+        loadListener(new PlayerMoveOnSlime());
+        loadListener(new PlayerMoveOnIce());
+        loadListener(new PlayerMoveListener(config));
+        logConsole("&9| &7Loading PlayerBlockBreak and PlayerBlockPlace listeners...");
+        loadListener(new PlayerBlockBreak());
+        loadListener(new PlayerBlockPlace());
+        logConsole("&9| &7Loading PlayerJoin and PlayerLeave listeners...");
+        loadListener(new PlayerLeaveListener());
+        loadListener(new PlayerJoinListener());
+        logConsole("&9| &7Loading Game listeners...");
+        logConsole("&9| &7Loaded &a" + listenersTotal + " &7listener(s)!");
+        logConsole("&9|");
+        logConsole("&9|----------|");
     }
 
     @Override
     public void onDisable() {
-        removeScoreboard();
+        logConsole("&9|----------|");
+        logConsole("&9|");
+        logConsole("&9| &cFALL GUYS");
+        logConsole("&9| &7Disabling plugin version");
+        logConsole("&9| &a" + ver);
+        logConsole("&9|");
+        logConsole("&9| &7Removing tablist from players...");
         removeTablist();
+        logConsole("&9| &7Removing scoreboard from players...");
+        removeScoreboard();
+        logConsole("&9| &7Removing all blocks from plugin...");
         for (Arena arena : arenaManager.getArenas()) {
             for (int i = 0; i < arena.getBlocks().size(); i++) {
                 for (int i2 = 0; i2 < arena.getBlocks().get(i).blocks.size(); i2++) {
@@ -90,6 +135,22 @@ public class FallGuys extends JavaPlugin implements LanguageHandler {
                 }
             }
         }
+        logConsole("&9|");
+        logConsole("&9|----------|");
+    }
+
+    public void loadCommand(String command, CommandExecutor executor) {
+    getCommand(command).setExecutor(executor);
+        commandsTotal++;
+    }
+
+    public void loadListener(Listener listener) {
+        Bukkit.getPluginManager().registerEvents(listener, this);
+        listenersTotal++;
+    }
+
+    public void logConsole(String message) {
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', message));
     }
 
     public void removeScoreboard() {

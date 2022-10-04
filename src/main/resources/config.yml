@@ -1,5 +1,6 @@
 required_players: 2
 countdown-seconds: 15
+game-time: 300
 spawn:
   world: "world"
   x: 0
@@ -15,3 +16,19 @@ arenas:
     z: 32
     yaw: 0
     pitch: 90
+    # IF SCOREBOARD WILL BE GREATER THAN 15 LINES, THE LINES AFTER 15 WILL BE REMOVED.
+# IF TAB PLUGIN FROM NEZNAMY WAS NOT FOUND,
+# YOU CAN ENABLE OR DISABLE CUSTOM SCOREBOARD FROM THIS PLUGIN
+scoreboard-enabled: true
+# TITLE OF SCOREBOARD
+scoreboard-displayname: "&c&lFALLGUYS"
+scoreboard:
+  - "&aThis is custom scoreboard from"
+  - "&cFallGuys"
+tablist-enabled: true
+tablist-header:
+  - ""
+  - ""
+tablist-footer:
+  - ""
+  - ""

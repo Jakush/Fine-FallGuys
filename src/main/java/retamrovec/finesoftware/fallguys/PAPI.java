@@ -5,20 +5,9 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Instance.Arena;
-import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
 
 public class PAPI extends PlaceholderExpansion {
-
-    FallGuys fallGuys;
-    ArenaManager arenaManager;
-    public PAPI(FallGuys fallGuys, ArenaManager arenaManager) {
-        this.fallGuys = fallGuys;
-        this.arenaManager = arenaManager;
-    }
-
-
     @Override
     public @NotNull String getIdentifier() {
         return "fallguys";
@@ -26,12 +15,12 @@ public class PAPI extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getAuthor() {
-        return "RETAMROVEC, Yando0, BoogeyMan";
+        return "RETAMROVEC";
     }
 
     @Override
     public @NotNull String getVersion() {
-        return fallGuys.getDescription().getVersion();
+        return FallGuys.instance().getDescription().getVersion();
     }
 
     @Override
@@ -41,11 +30,18 @@ public class PAPI extends PlaceholderExpansion {
 
     @Override
     public String onPlaceholderRequest(Player player, @NotNull String params) {
-        if (params.equalsIgnoreCase("arena_" + player.getName())) {
-            Arena arena = FallGuys.instance().getArenaManager().getArena(player, true);
-            if (arena != null) {
-                return String.valueOf(arena.getId());
-            }
+        Arena arena = FallGuys.instance().getArenaManager().getArena(player);
+        if (params.equalsIgnoreCase("arenaId")) {
+            return String.valueOf(arena.getId());
+        }
+        if (params.equalsIgnoreCase("state")) {
+            return arena.getState().toString();
+        }
+        if (params.equalsIgnoreCase("level")) {
+            return String.valueOf(arena.getGame().levels.get(player.getUniqueId()));
+        }
+        if (params.equalsIgnoreCase("time")) {
+            return String.valueOf(arena.getGame().getTime());
         }
         return null;
     }

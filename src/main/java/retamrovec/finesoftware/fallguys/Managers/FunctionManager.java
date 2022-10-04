@@ -1,6 +1,7 @@
 package retamrovec.finesoftware.fallguys.Managers;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import retamrovec.finesoftware.fallguys.Maps.Map1.SlimeJump;
 import retamrovec.finesoftware.fallguys.Handlers.FunctionsHandler;
 
@@ -39,5 +40,13 @@ public class FunctionManager implements FunctionsHandler {
         for (SlimeJump slimeJump : slimeJumps) {
             slimeJump.start();
         }
+    }
+
+    public ArrayList<Location> getSlimeJumps(int id) {
+        return slimeJumps.get(id).getBlocks();
+    }
+
+    public List<SlimeJump> getSlimeJumps() {
+        return slimeJumps;
     }
 }

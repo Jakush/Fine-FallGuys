@@ -1,9 +1,6 @@
 package retamrovec.finesoftware.fallguys.Instance;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.Handlers.ConfigHandler;
@@ -12,19 +9,17 @@ import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
+import retamrovec.finesoftware.fallguys.Maps.Map1.SlimeJump;
 import retamrovec.finesoftware.fallguys.PAPI;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * @author RETAMROVEC
+ */
 public class Arena implements ConfigHandler, LanguageHandler {
-
-    /*
-
-    This class is developed by RETAMROVEC.
-
-     */
 
     private int id;
     private Location spawn;
@@ -52,6 +47,7 @@ public class Arena implements ConfigHandler, LanguageHandler {
      */
 
     public void start() {
+        Bukkit.getLogger().info("222");
         game.start();
     }
 
@@ -84,6 +80,20 @@ public class Arena implements ConfigHandler, LanguageHandler {
     public void setGamemode(GameMode gamemode) {
         for (UUID uuid : players) {
             Bukkit.getPlayer(uuid).setGameMode(gamemode);
+        }
+    }
+
+    public void sendScoreboard() {
+        for (UUID uuid : players) {
+            Scoreboard scoreboard = new Scoreboard(uuid);
+            scoreboard.start();
+        }
+    }
+
+    public void sendTablist() {
+        for (UUID uuid : players) {
+            Tablist tablist = new Tablist(uuid);
+            tablist.start();
         }
     }
 
@@ -154,5 +164,7 @@ public class Arena implements ConfigHandler, LanguageHandler {
     public List<UUID> getPlayers() {return players;}
     public Game getGame() {return game;}
     public void setState(GameState state) {this.state = state;}
+    public List<SlimeJump> getBlocks() {return game.functionManager.getSlimeJumps();}
+    public World getWorld() {return Bukkit.getWorld(getConfig().getString("arenas." + id + ".world"));}
 
 }

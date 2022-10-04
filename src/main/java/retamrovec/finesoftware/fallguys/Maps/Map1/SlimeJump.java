@@ -42,10 +42,6 @@ public class SlimeJump extends BukkitRunnable implements FunctionsHandler {
         runTaskTimer(FallGuys.instance(), 20, speed);
     }
 
-    public void stop() {
-        cancel();
-    }
-
     @Override
     public void run() {
         if (blocks.size() > 1) {
@@ -69,5 +65,9 @@ public class SlimeJump extends BukkitRunnable implements FunctionsHandler {
         Location location = new Location(world, resultX, resultY, resultZ, yaw, pitch);
         world.getBlockAt(location).setType(block);
         blocks.add(location);
+    }
+
+    public ArrayList<Location> getBlocks() {
+        return blocks;
     }
 }

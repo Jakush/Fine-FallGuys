@@ -1,5 +1,6 @@
 package retamrovec.finesoftware.fallguys.Instance;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
@@ -8,13 +9,10 @@ import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.PAPI;
 
+/**
+ * @author RETAMROVEC
+ */
 public class Countdown extends BukkitRunnable implements LanguageHandler {
-
-    /*
-
-    This class is developed by RETAMROVEC.
-
-    */
 
     private final Arena arena;
     public int countDownSeconds;
@@ -28,10 +26,12 @@ public class Countdown extends BukkitRunnable implements LanguageHandler {
     public void start() {
         arena.setState(GameState.COUNTDOWN);
         runTaskTimer(FallGuys.instance(), 0, 20);
+        Bukkit.getLogger().info("333");
     }
 
     @Override
     public void run() {
+        Bukkit.getLogger().info("4444");
         if (countDownSeconds == 0) {
             arena.start();
             cancel();

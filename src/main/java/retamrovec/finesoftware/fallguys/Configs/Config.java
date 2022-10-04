@@ -5,13 +5,10 @@ import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 import retamrovec.finesoftware.fallguys.Handlers.ConfigHandler;
 
+/**
+ * @author RETAMROVEC
+ */
 public class Config implements ConfigHandler {
-
-    /*
-
-    This class is developed by RETAMROVEC.
-
-     */
 
     private static JavaPlugin plugin;
     public Config(JavaPlugin plugin) {
@@ -20,6 +17,10 @@ public class Config implements ConfigHandler {
 
     public static void newConfiguration() {
         plugin.saveResource("config.yml", false);
+    }
+
+    public int getGameTime() {
+        return getConfig().getInt("game-time");
     }
 
     public int getNeededPlayers() {

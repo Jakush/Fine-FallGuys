@@ -16,7 +16,9 @@ import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Managers.FunctionManager;
 import retamrovec.finesoftware.fallguys.PAPI;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -28,15 +30,19 @@ import java.util.UUID;
 public class Game implements LanguageHandler, FunctionsHandler, ConfigHandler {
 
     private final Arena arena;
-    private final GameTime gameTime;
+    private GameTime gameTime;
     public final FunctionManager functionManager;
-    private final Config config = new Config(FallGuys.instance());
-    public final HashMap<UUID, Integer> levels = new HashMap<>();
+    private final Config config;
+    public final HashMap<UUID, Integer> levels;
+    public final List<Integer> level;
 
     public Game(@NotNull Arena arena) {
         this.arena = arena;
         this.functionManager = new FunctionManager(arena.getId());
         this.gameTime = new GameTime(arena);
+        this.levels = new HashMap<>();
+        this.config = new Config(FallGuys.instance());
+        this.level = new ArrayList<>();
     }
 
     public void start() {
@@ -94,5 +100,16 @@ public class Game implements LanguageHandler, FunctionsHandler, ConfigHandler {
 
     public int getTime() {
         return gameTime.i;
+    }
+
+    public GameTime getGameTime() { return gameTime; }
+
+    public void reset() {
+        getGameTime().stop();
+        gameTime = new GameTime(arena);
+    }
+
+    public HashMap<UUID, Integer> getLevels() {
+        return levels;
     }
 }

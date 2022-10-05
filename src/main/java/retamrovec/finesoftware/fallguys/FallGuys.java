@@ -20,6 +20,7 @@ import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Instance.Arena;
 import retamrovec.finesoftware.fallguys.Listeners.*;
 import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
+import retamrovec.finesoftware.fallguys.Managers.BungeeManager;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 
 import java.util.UUID;
@@ -111,6 +112,11 @@ public class FallGuys extends JavaPlugin implements LanguageHandler {
         loadListener(new PlayerJoinListener());
         logConsole("&9| &7Loading Game listeners...");
         logConsole("&9| &7Loaded &a" + listenersTotal + " &7listener(s)!");
+        if (getConfig().getBoolean("bungeecord")) {
+            logConsole("&9| &7Enabling bungeecord features...");
+            BungeeManager bungee = new BungeeManager(this);
+            bungee.registerBungeecord();
+        }
         logConsole("&9|");
         logConsole("&9|----------|");
     }
@@ -134,6 +140,11 @@ public class FallGuys extends JavaPlugin implements LanguageHandler {
                     arena.getWorld().getBlockAt(arena.getBlocks().get(i).blocks.get(i2)).setType(Material.AIR);
                 }
             }
+        }
+        if (getConfig().getBoolean("bungeecord")) {
+            logConsole("&9| &7Disabling bungeecord features...");
+            BungeeManager bungee = new BungeeManager(this);
+            bungee.unregisterBungeecord();
         }
         logConsole("&9|");
         logConsole("&9|----------|");

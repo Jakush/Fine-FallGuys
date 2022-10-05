@@ -5,9 +5,9 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import retamrovec.finesoftware.fallguys.Configs.Config;
+import retamrovec.finesoftware.fallguys.Events.FallGuysRoundEnd;
 import retamrovec.finesoftware.fallguys.FallGuys;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,28 +16,36 @@ public class GameTime extends BukkitRunnable {
     private final Arena arena;
     private final Config config;
     public int i;
+    private int i2;
+    public List<Integer> level;
     public GameTime(Arena arena) {
         this.arena = arena;
         config = new Config(FallGuys.instance());
         this.i = config.getGameTime();
     }
-    private final List<Integer> level = new ArrayList<>();
 
     public void start() {
         runTaskTimer(FallGuys.instance(), 0, 20);
+    }
+    public void stop() {
+        cancel();
     }
 
     @Override
     public void run() {
         if (i == 0) {
+            level = arena.getGame().level;
             level.add(level.size() + 1);
             for (UUID uuid : arena.getPlayers()) {
                 Player p = Bukkit.getPlayer(uuid);
+                Bukkit.getLogger().info("i2 " + i2);
+                Bukkit.getLogger().info("i " + i);
+                Bukkit.getLogger().info("Level " + level.size());
                 if (p == null) {
                     cancel();
                     return;
                 }
-                int i2 = arena.getGame().levels.get(uuid);
+                i2 = arena.getGame().getLevels().get(uuid);
                 if (i2 < level.size()) {
                     FallGuys.instance().removeScoreboard();
                     FallGuys.instance().removeTablist();
@@ -47,6 +55,7 @@ public class GameTime extends BukkitRunnable {
                 p.setGameMode(GameMode.SURVIVAL);
                 p.teleport(config.getArenaSpawn(arena.getId()));
             }
+            Bukkit.getPluginManager().callEvent(new FallGuysRoundEnd(arena.getPlayers(), arena));
             i = config.getGameTime();
             return;
         }

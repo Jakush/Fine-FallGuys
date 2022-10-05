@@ -1,6 +1,9 @@
 required_players: 2
 countdown-seconds: 15
 game-time: 300
+bungeecord: false
+fallback-servers:
+  - "1"
 spawn:
   world: "world"
   x: 0

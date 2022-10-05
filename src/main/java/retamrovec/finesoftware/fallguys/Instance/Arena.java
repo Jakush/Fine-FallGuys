@@ -160,6 +160,7 @@ public class Arena implements ConfigHandler, LanguageHandler {
 
         if (state == GameState.LIVE && players.size() < config.getNeededPlayers()) {
             sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.end_short_players"), true)));
+            game.reset();
             reset(false);
         }
     }

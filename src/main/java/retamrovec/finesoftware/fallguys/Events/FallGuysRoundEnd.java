@@ -4,7 +4,6 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.Instance.Arena;
-import retamrovec.finesoftware.fallguys.Instance.GameTime;
 
 import java.util.List;
 import java.util.UUID;

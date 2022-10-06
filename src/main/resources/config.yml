@@ -19,6 +19,14 @@ arenas:
     z: 32
     yaw: 0
     pitch: 90
+    # FIRST MAP
+    1:
+      world: "world"
+      x: 16
+      y: 70
+      z: 32
+      yaw: 0
+      pitch: 90
     # IF SCOREBOARD WILL BE GREATER THAN 15 LINES, THE LINES AFTER 15 WILL BE REMOVED.
 # IF TAB PLUGIN FROM NEZNAMY WAS NOT FOUND,
 # YOU CAN ENABLE OR DISABLE CUSTOM SCOREBOARD FROM THIS PLUGIN

@@ -16,7 +16,6 @@ public class GameTime extends BukkitRunnable {
     private final Arena arena;
     private final Config config;
     public int i;
-    private int i2;
     public List<Integer> level;
     public GameTime(Arena arena) {
         this.arena = arena;
@@ -35,17 +34,15 @@ public class GameTime extends BukkitRunnable {
     public void run() {
         if (i == 0) {
             level = arena.getGame().level;
+            if (level.size() > 3) return;
             level.add(level.size() + 1);
             for (UUID uuid : arena.getPlayers()) {
                 Player p = Bukkit.getPlayer(uuid);
-                Bukkit.getLogger().info("i2 " + i2);
-                Bukkit.getLogger().info("i " + i);
-                Bukkit.getLogger().info("Level " + level.size());
                 if (p == null) {
                     cancel();
                     return;
                 }
-                i2 = arena.getGame().getLevels().get(uuid);
+                int i2 = arena.getGame().getLevels().get(uuid);
                 if (i2 < level.size()) {
                     FallGuys.instance().removeScoreboard();
                     FallGuys.instance().removeTablist();
@@ -53,7 +50,7 @@ public class GameTime extends BukkitRunnable {
                     return;
                 }
                 p.setGameMode(GameMode.SURVIVAL);
-                p.teleport(config.getArenaSpawn(arena.getId()));
+                p.teleport(config.getMapSpawn(arena.getId(), level.size()));
             }
             Bukkit.getPluginManager().callEvent(new FallGuysRoundEnd(arena.getPlayers(), arena));
             i = config.getGameTime();

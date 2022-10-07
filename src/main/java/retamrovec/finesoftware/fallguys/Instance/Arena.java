@@ -170,12 +170,26 @@ public class Arena implements ConfigHandler, LanguageHandler {
 
     */
 
-    public int getId() {return id;}
-    public GameState getState() {return state;}
-    public List<UUID> getPlayers() {return players;}
-    public Game getGame() {return game;}
-    public void setState(GameState state) {this.state = state;}
-    public List<SlimeJump> getBlocks() {return game.functionManager.getSlimeJumps();}
-    public World getWorld() {return Bukkit.getWorld(getConfig().getString("arenas." + id + ".world"));}
+    public int getId() {
+        return id;
+    }
+    public GameState getState() {
+        return state;
+    }
+    public List<UUID> getPlayers() {
+        return players;
+    }
+    public Game getGame() {
+        return game;
+    }
+    public void setState(GameState state) {
+        this.state = state;
+    }
+    public List<SlimeJump> getBlocks() {
+        return game.functionManager.getSlimeJumps();
+    }
+    public World getWorld() {
+        return Bukkit.getWorld(getConfig().getString("arenas." + id + ".world"));
+    }
 
 }

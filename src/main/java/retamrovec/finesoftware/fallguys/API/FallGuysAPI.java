@@ -8,8 +8,6 @@ import java.util.List;
 
 public class FallGuysAPI {
 
-
-
     public Arena getArena(Player player) {
         return FallGuys.instance().getArenaManager().getArena(player);
     }

@@ -28,3 +28,4 @@ success:
   reload:
     config: "&aConfig file was reloaded successfully!"
     lang: "&aLanguage file was reloaded successfully!"
+    func: "&aFunctions file was reloaded successfully!"

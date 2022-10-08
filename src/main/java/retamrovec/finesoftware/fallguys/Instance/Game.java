@@ -112,4 +112,7 @@ public class Game implements LanguageHandler, FunctionsHandler, ConfigHandler {
     public HashMap<UUID, Integer> getLevels() {
         return levels;
     }
+    public List<Integer> getLevel() {
+        return level;
+    }
 }

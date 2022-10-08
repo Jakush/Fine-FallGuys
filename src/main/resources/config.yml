@@ -13,13 +13,14 @@ spawn:
   pitch: 90
 arenas:
   0:
+    # FIRST MAP
     world: "world"
     x: 16
     y: 69
     z: 32
     yaw: 0
     pitch: 90
-    # FIRST MAP
+    # SECOND MAP
     1:
       world: "world"
       x: 16

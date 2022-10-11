@@ -7,6 +7,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Events.FallGuysRoundEnd;
 import retamrovec.finesoftware.fallguys.FallGuys;
+import retamrovec.finesoftware.fallguys.Maps.Map2.Spinners;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,6 +36,9 @@ public class GameTime extends BukkitRunnable {
         if (i == 0) {
             level = arena.getGame().level;
             if (level.size() > 3) return;
+            if (level.size() == 1) {
+                FallGuys.instance().loadListener(new Spinners());
+            }
             level.add(level.size() + 1);
             for (UUID uuid : arena.getPlayers()) {
                 Player p = Bukkit.getPlayer(uuid);

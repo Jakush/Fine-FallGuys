@@ -3,6 +3,7 @@ package retamrovec.finesoftware.fallguys.Instance;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import retamrovec.finesoftware.fallguys.Builders.PlayerBuilder;
 import retamrovec.finesoftware.fallguys.Handlers.ConfigHandler;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
 import retamrovec.finesoftware.fallguys.Configs.Config;
@@ -154,14 +155,17 @@ public class Arena implements ConfigHandler, LanguageHandler {
         players.remove(player.getUniqueId());
         player.teleport(config.getLobbySpawn());
         player.sendTitle("", "");
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("player.disqualified"), player)));
-        scoreboard.get(player.getUniqueId()).stop();
-        tablist.get(player.getUniqueId()).stop();
+        new PlayerBuilder(player).sendPAPIMessage(getLang().getString("player.disqualified"));
+        for (UUID uuid : players) {
+            scoreboard.get(uuid).stop();
+            tablist.get(uuid).stop();
+        }
 
-        if (state == GameState.LIVE && players.size() < config.getNeededPlayers()) {
-            sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("game.end_short_players"), true)));
-            game.reset();
-            reset(false);
+        if (players.size() <= 1) {
+            for (UUID uuid : players) {
+                new PlayerBuilder(uuid).sendPAPIMessage(getLang().getString("game.end"));
+            }
+            reset(true);
         }
     }
     /*

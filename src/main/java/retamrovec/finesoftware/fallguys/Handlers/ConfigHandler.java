@@ -7,13 +7,12 @@ import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
 
 import java.io.File;
 
+/**
+ * @author RETAMROVEC
+ * @version 1.0
+ * @since 2022-10-9
+ */
 public interface ConfigHandler {
-
-    /*
-
-    This class is developed by RETAMROVEC.
-
-     */
 
     default YamlConfiguration getConfig() {
         ConfigManager config = new ConfigManager(FallGuys.instance().getDataFolder(), "config.yml");

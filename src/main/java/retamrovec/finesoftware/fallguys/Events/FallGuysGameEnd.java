@@ -8,6 +8,11 @@ import retamrovec.finesoftware.fallguys.Instance.Arena;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * @author RETAMROVEC
+ * @version 1.0
+ * @since 2022-10-9
+ */
 public class FallGuysGameEnd extends Event {
 
     private static final HandlerList HANDLERS_LIST = new HandlerList();

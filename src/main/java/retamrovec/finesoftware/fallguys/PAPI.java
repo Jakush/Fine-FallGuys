@@ -31,6 +31,7 @@ public class PAPI extends PlaceholderExpansion {
     @Override
     public String onPlaceholderRequest(Player player, @NotNull String params) {
         Arena arena = FallGuys.instance().getArenaManager().getArena(player);
+        if (arena == null) return null;
         if (params.equalsIgnoreCase("arenaId")) {
             return String.valueOf(arena.getId());
         }

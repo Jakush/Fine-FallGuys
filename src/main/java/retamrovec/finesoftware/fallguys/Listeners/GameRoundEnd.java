@@ -12,6 +12,11 @@ import retamrovec.finesoftware.fallguys.FallGuys;
 
 import java.util.UUID;
 
+/**
+ * @author RETAMROVEC
+ * @version 1.0
+ * @since 2022-10-9
+ */
 public class GameRoundEnd implements Listener {
 
     private final Config config = new Config(FallGuys.instance());

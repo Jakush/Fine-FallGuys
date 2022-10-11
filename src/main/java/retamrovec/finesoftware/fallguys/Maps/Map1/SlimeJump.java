@@ -10,6 +10,11 @@ import retamrovec.finesoftware.fallguys.Handlers.FunctionsHandler;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * @author RETAMROVEC
+ * @version 1.0
+ * @since 2022-10-9
+ */
 public class SlimeJump extends BukkitRunnable implements FunctionsHandler {
 
     private final World world;

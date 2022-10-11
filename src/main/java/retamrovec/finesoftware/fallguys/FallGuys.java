@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -17,15 +18,23 @@ import retamrovec.finesoftware.fallguys.Configs.Config;
 import retamrovec.finesoftware.fallguys.Configs.Functions;
 import retamrovec.finesoftware.fallguys.Configs.Messages;
 import retamrovec.finesoftware.fallguys.Enums.GameState;
+import retamrovec.finesoftware.fallguys.Events.FallGuysGameEnd;
+import retamrovec.finesoftware.fallguys.Events.FallGuysRoundEnd;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 import retamrovec.finesoftware.fallguys.Instance.Arena;
 import retamrovec.finesoftware.fallguys.Listeners.*;
 import retamrovec.finesoftware.fallguys.Managers.ArenaManager;
 import retamrovec.finesoftware.fallguys.Managers.BungeeManager;
 import retamrovec.finesoftware.fallguys.Managers.ConfigManager;
+import retamrovec.finesoftware.fallguys.Maps.Map2.Spinners;
 
 import java.util.UUID;
 
+/**
+ * @author RETAMROVEC
+ * @version 1.0
+ * @since 2022-10-9
+ */
 public class FallGuys extends JavaPlugin implements LanguageHandler {
 
     // Managers (instances)
@@ -141,6 +150,8 @@ public class FallGuys extends JavaPlugin implements LanguageHandler {
                     arena.getWorld().getBlockAt(arena.getBlocks().get(i).blocks.get(i2)).setType(Material.AIR);
                 }
             }
+            arena.getGame().reset();
+            arena.reset(true);
         }
         if (getConfig().getBoolean("bungeecord")) {
             logConsole("&9| &7Disabling bungeecord features...");

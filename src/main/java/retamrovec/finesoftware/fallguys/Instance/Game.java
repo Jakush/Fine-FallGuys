@@ -22,10 +22,9 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
- * You don't have permission to copy this class.
  * @author RETAMROVEC
- *
+ * @version 1.0
+ * @since 2022-10-9
  */
 public class Game implements LanguageHandler, FunctionsHandler, ConfigHandler {
 

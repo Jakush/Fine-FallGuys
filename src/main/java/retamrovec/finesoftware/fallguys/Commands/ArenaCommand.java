@@ -1,11 +1,11 @@
 package retamrovec.finesoftware.fallguys.Commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import retamrovec.finesoftware.fallguys.Builders.CommandBuilder;
 import retamrovec.finesoftware.fallguys.Builders.CommandSenderBuilder;
 import retamrovec.finesoftware.fallguys.Builders.PlayerBuilder;
 import retamrovec.finesoftware.fallguys.Commands.SubCommands.*;
@@ -15,46 +15,53 @@ import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 
 /**
  * @author RETAMROVEC
+ * @since 11.10.2022
+ * @version 1.0
  */
 public class ArenaCommand implements CommandExecutor, ConfigHandler, LanguageHandler, FunctionsHandler {
 
-    public String colour(String message) {
-        return ChatColor.translateAlternateColorCodes('&', message);
-    }
-
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-
-        if (args.length == 0 || args[0].equalsIgnoreCase("?") || args[0].equalsIgnoreCase("help")) {
+        /*
+        BOOLEANS
+         */
+        boolean help = args.length == 0 || args[0].equalsIgnoreCase("?") || args[0].equalsIgnoreCase("help");
+        boolean list = args[0].equalsIgnoreCase("list") && args.length == 1;
+        boolean isPlayer = sender instanceof Player;
+        boolean leave = args[0].equalsIgnoreCase("leave") && args.length == 1;
+        boolean join = args[0].equalsIgnoreCase("join") && args.length == 2;
+        boolean reload = args[0].equalsIgnoreCase("reload") && args.length == 2;
+        /*
+        SUBCOMMANDS
+         */
+        new CommandBuilder(help).option().True(() -> {
             HelpSubCommand helpSubCommand = new HelpSubCommand();
             helpSubCommand.onSubcommand(sender);
-            return false;
-        }
-        if (args[0].equalsIgnoreCase("list") && args.length == 1) {
+        }).reset();
+        new CommandBuilder(list).option().True(() -> {
             ListSubCommand listSubCommand = new ListSubCommand();
             listSubCommand.onSubcommand(sender);
-            return false;
-        }
-        if (!(sender instanceof Player)) {
-            new CommandSenderBuilder(sender).sendMessage("&cYou can use this command only in-game currently.");
-            return false;
-        }
+        }).reset();
+        /*
+        SUBCOMMANDS FOR ONLY PLAYERS
+         */
+        new CommandBuilder(isPlayer).option().False(() -> new CommandSenderBuilder(sender).sendMessage("&cYou can use this command only in-game currently.")).reset();
         Player player = (Player) sender;
-        if (args[0].equalsIgnoreCase("leave") && args.length == 1) {
+        new CommandBuilder(leave).option().True(() -> {
             LeaveSubCommand leaveSubCommand = new LeaveSubCommand();
             leaveSubCommand.onSubcommand(player);
-            return false;
-        }
-        if (args[0].equalsIgnoreCase("join") && args.length == 2) {
+        }).reset();
+        new CommandBuilder(join).option().True(() -> {
             JoinSubCommand joinSubCommand = new JoinSubCommand();
             joinSubCommand.onSubcommand(player, args);
-            return false;
-        }
-        if (args[0].equalsIgnoreCase("reload") && args.length == 2) {
-            ReloadSubCommand reloadSubCommand = new ReloadSubCommand();
-            reloadSubCommand.onSubcommand(player, args);
-            return false;
-        }
+        });
+        new CommandBuilder(reload).option().True(() -> {
+           ReloadSubCommand reloadSubCommand = new ReloadSubCommand();
+           reloadSubCommand.onSubcommand(player, args);
+        });
+        /*
+        IF ARG DOESN'T EQUALS TO ANY SUBCOMMAND
+         */
         new PlayerBuilder(player).sendPAPIMessage(getLang().getString("error.invalid_use"));
         return false;
     }

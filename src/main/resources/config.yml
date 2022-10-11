@@ -20,6 +20,8 @@ arenas:
     z: 32
     yaw: 0
     pitch: 90
+    # SETTINGS
+    spinner-block: "YELLOW_TERRACOTTA"
     # SECOND MAP
     1:
       world: "world"
@@ -28,6 +30,8 @@ arenas:
       z: 32
       yaw: 0
       pitch: 90
+      # Type here material DATA. Search more at
+      # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
     # IF SCOREBOARD WILL BE GREATER THAN 15 LINES, THE LINES AFTER 15 WILL BE REMOVED.
 # IF TAB PLUGIN FROM NEZNAMY WAS NOT FOUND,
 # YOU CAN ENABLE OR DISABLE CUSTOM SCOREBOARD FROM THIS PLUGIN
@@ -37,6 +41,7 @@ scoreboard-displayname: "&c&lFALLGUYS"
 scoreboard:
   - "&aThis is custom scoreboard from"
   - "&cFallGuys"
+  - "&c%fallguys_time%"
 tablist-enabled: true
 tablist-header:
   - ""

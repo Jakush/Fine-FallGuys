@@ -1,5 +1,6 @@
 package retamrovec.finesoftware.fallguys.Builders;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -7,6 +8,8 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.PAPI;
+
+import java.util.UUID;
 
 
 /**
@@ -23,6 +26,10 @@ public class PlayerBuilder {
      */
     public PlayerBuilder(Player player) {
         this.player = player;
+    }
+
+    public PlayerBuilder(UUID uuid) {
+        this.player = Bukkit.getPlayer(uuid);
     }
 
     /**

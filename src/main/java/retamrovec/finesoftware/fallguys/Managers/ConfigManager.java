@@ -22,16 +22,6 @@ public class ConfigManager {
         this.getConfig = YamlConfiguration.loadConfiguration(configuration);
     }
 
-    public void createConfiguration() {
-        if (!configuration.exists()) {
-            try {
-                configuration.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
     public YamlConfiguration getConfiguration() {
         return getConfig;
     }

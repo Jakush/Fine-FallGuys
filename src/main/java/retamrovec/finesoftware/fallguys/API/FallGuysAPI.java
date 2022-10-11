@@ -9,6 +9,11 @@ import retamrovec.finesoftware.fallguys.Instance.Arena;
 
 import java.util.List;
 
+/**
+ * @author RETAMROVEC
+ * @version 1.0
+ * @since 2022-10-9
+ */
 public class FallGuysAPI {
 
     public Arena getArena(Player player) {

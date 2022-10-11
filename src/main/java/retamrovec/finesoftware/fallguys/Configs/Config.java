@@ -51,12 +51,12 @@ public class Config implements ConfigHandler {
     }
 
     public Location getMapSpawn(int id, int mapID) {
-        return new Location(Bukkit.getWorld(getConfig().getString("arenas." + id + mapID + ".world")),
-                getConfig().getDouble("arenas." + id + mapID + ".x"),
-                getConfig().getDouble("arenas." + id + mapID + ".y"),
-                getConfig().getDouble("arenas." + id + mapID + ".z"),
-                (float) getConfig().getDouble("arenas." + id + mapID + ".yaw"),
-                (float) getConfig().getDouble("arenas." + id + mapID + ".pitch"));
+        return new Location(Bukkit.getWorld(getConfig().getString("arenas." + id + "." + mapID + ".world")),
+                getConfig().getDouble("arenas." + id + "." + mapID + ".x"),
+                getConfig().getDouble("arenas." + id + "." + mapID + ".y"),
+                getConfig().getDouble("arenas." + id + "." + mapID + ".z"),
+                (float) getConfig().getDouble("arenas." + id + "." + mapID + ".yaw"),
+                (float) getConfig().getDouble("arenas." + id + "." + mapID + ".pitch"));
     }
     public void init() {
         saveDefaultConfig();

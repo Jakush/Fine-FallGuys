@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.NotNull;
 import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Handlers.ConfigHandler;
 import retamrovec.finesoftware.fallguys.Configs.Config;
@@ -21,7 +22,7 @@ public class PlayerMoveListener implements Listener, ConfigHandler, FunctionsHan
     }
 
     @EventHandler
-    public void onMove(PlayerMoveEvent e) {
+    public void onMove(@NotNull PlayerMoveEvent e) {
         if (FallGuys.instance().getArenaManager().getArena(e.getPlayer()) == null) return;
         if (FallGuys.instance().getArenaManager().getArena(e.getPlayer()).getPlayers() == null) return;
         if (FallGuys.instance().getArenaManager().getArena(e.getPlayer()).getPlayers().contains(e.getPlayer().getUniqueId())) {

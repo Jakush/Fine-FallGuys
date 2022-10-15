@@ -67,6 +67,9 @@ public class Game implements LanguageHandler, FunctionsHandler, ConfigHandler {
     }
 
     public void qualify(@NotNull Player player, boolean spectator) {
+        if (levels == null) {
+            throw new NullPointerException("There is a problem found! (404xLEVELS)");
+        }
         int playerLevel = levels.get(player.getUniqueId()) + 1;
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', PAPI.use(getLang().getString("player.qualified"), player)));
         Firework firework = newFirework(player);

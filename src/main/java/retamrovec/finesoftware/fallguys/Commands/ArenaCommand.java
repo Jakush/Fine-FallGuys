@@ -13,12 +13,17 @@ import retamrovec.finesoftware.fallguys.Handlers.ConfigHandler;
 import retamrovec.finesoftware.fallguys.Handlers.FunctionsHandler;
 import retamrovec.finesoftware.fallguys.Handlers.LanguageHandler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author RETAMROVEC
  * @since 11.10.2022
  * @version 1.0
  */
 public class ArenaCommand implements CommandExecutor, ConfigHandler, LanguageHandler, FunctionsHandler {
+
+    private final List<CommandSender> usedCommand = new ArrayList<>();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -37,10 +42,12 @@ public class ArenaCommand implements CommandExecutor, ConfigHandler, LanguageHan
         new CommandBuilder(help).option().True(() -> {
             HelpSubCommand helpSubCommand = new HelpSubCommand();
             helpSubCommand.onSubcommand(sender);
+            usedCommand.add(sender);
         }).reset();
         new CommandBuilder(list).option().True(() -> {
             ListSubCommand listSubCommand = new ListSubCommand();
             listSubCommand.onSubcommand(sender);
+            usedCommand.add(sender);
         }).reset();
         /*
         SUBCOMMANDS FOR ONLY PLAYERS
@@ -50,19 +57,25 @@ public class ArenaCommand implements CommandExecutor, ConfigHandler, LanguageHan
         new CommandBuilder(leave).option().True(() -> {
             LeaveSubCommand leaveSubCommand = new LeaveSubCommand();
             leaveSubCommand.onSubcommand(player);
+            usedCommand.add(sender);
         }).reset();
         new CommandBuilder(join).option().True(() -> {
             JoinSubCommand joinSubCommand = new JoinSubCommand();
             joinSubCommand.onSubcommand(player, args);
+            usedCommand.add(sender);
         });
         new CommandBuilder(reload).option().True(() -> {
            ReloadSubCommand reloadSubCommand = new ReloadSubCommand();
            reloadSubCommand.onSubcommand(player, args);
+           usedCommand.add(sender);
         });
         /*
         IF ARG DOESN'T EQUALS TO ANY SUBCOMMAND
          */
-        new PlayerBuilder(player).sendPAPIMessage(getLang().getString("error.invalid_use"));
+        if (!usedCommand.contains(sender)) {
+            String commandNotFound = getLang().getString("error.invalid_use");
+            new PlayerBuilder(player).sendPAPIMessage(commandNotFound);
+        }
         return false;
     }
 }

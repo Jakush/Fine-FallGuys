@@ -3,7 +3,11 @@ package retamrovec.finesoftware.fallguys.Configs;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
+import retamrovec.finesoftware.fallguys.Builders.PlayerBuilder;
+import retamrovec.finesoftware.fallguys.FallGuys;
 import retamrovec.finesoftware.fallguys.Handlers.ConfigHandler;
+
+import java.util.UUID;
 
 /**
  * @author RETAMROVEC
@@ -51,6 +55,12 @@ public class Config implements ConfigHandler {
     }
 
     public Location getMapSpawn(int id, int mapID) {
+        if (getConfig().getString("arenas." + id + "." + mapID + ".world") == null) {
+            for (UUID uuid : FallGuys.instance().getArenaManager().getArena(id).getPlayers()) {
+                new PlayerBuilder(uuid).sendPAPIMessage("&cGame was ended, because next map was not found!");
+            }
+            FallGuys.instance().getArenaManager().getArena(id).reset(true);
+        }
         return new Location(Bukkit.getWorld(getConfig().getString("arenas." + id + "." + mapID + ".world")),
                 getConfig().getDouble("arenas." + id + "." + mapID + ".x"),
                 getConfig().getDouble("arenas." + id + "." + mapID + ".y"),

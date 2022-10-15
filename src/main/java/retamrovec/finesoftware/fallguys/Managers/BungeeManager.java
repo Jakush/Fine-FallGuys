@@ -1,14 +1,12 @@
 package retamrovec.finesoftware.fallguys.Managers;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.jetbrains.annotations.NotNull;
+import retamrovec.finesoftware.fallguys.Handlers.ConfigHandler;
 
-public class BungeeManager implements PluginMessageListener {
+public class BungeeManager implements PluginMessageListener, ConfigHandler {
 
     private final JavaPlugin plugin;
     public BungeeManager(JavaPlugin plugin) {
@@ -27,15 +25,6 @@ public class BungeeManager implements PluginMessageListener {
 
     @Override
     public void onPluginMessageReceived(@NotNull String channel, @NotNull Player player, byte[] message) {
-        if (!channel.equals("BungeeCord")) {
-            return;
-        }
-        ByteArrayDataInput in = ByteStreams.newDataInput(message);
-        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-        String subchannel = in.readUTF();
-        if (subchannel.equals("Bukkit-FallGuys")) {
-            out.writeUTF("Connect");
-            out.writeUTF("Connect");
-        }
+        if (!channel.equals("BungeeCord")) return;
     }
 }
